@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -100,166 +99,166 @@ const Index = () => {
             </Link>
           </div>
         </div>
+      </div>
 
-        {/* Features */}
-        <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
-            למה לבחור ב-LeadFinder?
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {features.map((feature, index) => (
-              <ClayCard key={index} variant="elevated" className="text-center">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <feature.icon className="w-8 h-8 text-purple-700" />
-                </div>
-                <h3 className="text-xl font-semibold text-slate-700 mb-4">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
-              </ClayCard>
-            ))}
-          </div>
-        </div>
-
-        {/* Pricing Section */}
-        <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
-            תמחור פשוט ושקוף
-          </h2>
-          
-          <div className="max-w-md mx-auto">
-            <ClayCard variant="elevated" className="text-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 to-blue-500"></div>
-              
-              <div className="p-8">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <Star className="w-8 h-8 text-green-700" />
-                </div>
-                
-                <h3 className="text-2xl font-bold text-slate-700 mb-4">מנוי חודשי</h3>
-                
-                <div className="mb-6">
-                  <div className="text-5xl font-bold text-purple-600 mb-2">₪100</div>
-                  <div className="text-slate-600">לחודש</div>
-                </div>
-                
-                <div className="bg-green-100 text-green-800 py-2 px-4 rounded-2xl mb-6 font-semibold">
-                  ניסיון חינמי לֵ5 ימים
-                </div>
-                
-                <div className="space-y-3 mb-8 text-right">
-                  <div className="flex items-center justify-start">
-                    <Check className="w-5 h-5 text-green-600 ml-3" />
-                    <span className="text-slate-700">סריקה אוטומטית יומית</span>
-                  </div>
-                  <div className="flex items-center justify-start">
-                    <Check className="w-5 h-5 text-green-600 ml-3" />
-                    <span className="text-slate-700">לידים בזמן אמת</span>
-                  </div>
-                  <div className="flex items-center justify-start">
-                    <Check className="w-5 h-5 text-green-600 ml-3" />
-                    <span className="text-slate-700">דאשבורד מתקדם</span>
-                  </div>
-                  <div className="flex items-center justify-start">
-                    <Check className="w-5 h-5 text-green-600 ml-3" />
-                    <span className="text-slate-700">ביטול בכל עת</span>
-                  </div>
-                </div>
-                
-                <Link to="/register">
-                  <ClayButton variant="primary" size="lg" className="w-full text-lg">
-                    התחל ניסיון חינמי
-                  </ClayButton>
-                </Link>
+      {/* Features */}
+      <div className="mb-20">
+        <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+          למה לבחור ב-LeadFinder?
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {features.map((feature, index) => (
+            <ClayCard key={index} variant="elevated" className="text-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <feature.icon className="w-8 h-8 text-purple-700" />
               </div>
-            </ClayCard>
-          </div>
-        </div>
-
-        {/* Chat Examples */}
-        <div className="grid md:grid-cols-2 gap-6 mb-20">
-          {chatExamples.map((example, index) => (
-            <ClayCard key={index} className="text-center overflow-hidden">
-              <img 
-                src={example.image} 
-                alt={`דוגמה לשיחה עם ${example.profession}`}
-                className="w-full h-32 object-cover object-top rounded-2xl mb-4"
-              />
-              <h3 className="text-lg font-semibold text-slate-700 mb-1">{example.profession}</h3>
-              <p className="text-slate-600">{example.location}</p>
+              <h3 className="text-xl font-semibold text-slate-700 mb-4">{feature.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{feature.description}</p>
             </ClayCard>
           ))}
         </div>
+      </div>
 
-        {/* How it works */}
-        <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
-            איך זה עובד?
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <ClayCard className="text-center">
-              <div className="w-12 h-12 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center text-green-800 font-bold text-xl shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
-                1
-              </div>
-              <h3 className="text-lg font-semibold text-slate-700 mb-3">הרשמה ומילוי פרטים</h3>
-              <p className="text-slate-600">מלא את הפרטים על העסק שלך, קהל היעד, והמיקום הגיאוגרפי</p>
-            </ClayCard>
-            
-            <ClayCard className="text-center">
-              <div className="w-12 h-12 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center text-blue-800 font-bold text-xl shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
-                2
-              </div>
-              <h3 className="text-lg font-semibold text-slate-700 mb-3">סריקה אוטומטית</h3>
-              <p className="text-slate-600">המערכת סורקת פוסטים בפייסבוק ומוצאת הזדמנויות רלוונטיות</p>
-            </ClayCard>
-            
-            <ClayCard className="text-center">
-              <div className="w-12 h-12 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-200 to-purple-300 flex items-center justify-center text-purple-800 font-bold text-xl shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
-                3
-              </div>
-              <h3 className="text-lg font-semibold text-slate-700 mb-3">קבלת לידים</h3>
-              <p className="text-slate-600">צפה בדאשבורד ותגובי על הפוסטים הרלוונטיים ביותר</p>
-            </ClayCard>
-          </div>
-        </div>
+      {/* Chat Examples */}
+      <div className="grid md:grid-cols-2 gap-6 mb-20">
+        {chatExamples.map((example, index) => (
+          <ClayCard key={index} className="text-center overflow-hidden">
+            <img 
+              src={example.image} 
+              alt={`דוגמה לשיחה עם ${example.profession}`}
+              className="w-full h-32 object-cover object-top rounded-2xl mb-4"
+            />
+            <h3 className="text-lg font-semibold text-slate-700 mb-1">{example.profession}</h3>
+            <p className="text-slate-600">{example.location}</p>
+          </ClayCard>
+        ))}
+      </div>
 
-        {/* FAQ Section */}
-        <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
-            שאלות נפוצות
-          </h2>
+      {/* How it works */}
+      <div className="mb-20">
+        <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+          איך זה עובד?
+        </h2>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          <ClayCard className="text-center">
+            <div className="w-12 h-12 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center text-green-800 font-bold text-xl shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
+              1
+            </div>
+            <h3 className="text-lg font-semibold text-slate-700 mb-3">הרשמה ומילוי פרטים</h3>
+            <p className="text-slate-600">מלא את הפרטים על העסק שלך, קהל היעד, והמיקום הגיאוגרפי</p>
+          </ClayCard>
           
-          <ClayCard variant="elevated" className="max-w-4xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b border-slate-200 last:border-b-0">
-                  <AccordionTrigger className="text-right text-lg font-semibold text-slate-700 hover:text-purple-600 py-6">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-right text-slate-600 leading-relaxed pb-6">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+          <ClayCard className="text-center">
+            <div className="w-12 h-12 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center text-blue-800 font-bold text-xl shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
+              2
+            </div>
+            <h3 className="text-lg font-semibold text-slate-700 mb-3">סריקה אוטומטית</h3>
+            <p className="text-slate-600">המערכת סורקת פוסטים בפייסבוק ומוצאת הזדמנויות רלוונטיות</p>
+          </ClayCard>
+          
+          <ClayCard className="text-center">
+            <div className="w-12 h-12 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-200 to-purple-300 flex items-center justify-center text-purple-800 font-bold text-xl shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
+              3
+            </div>
+            <h3 className="text-lg font-semibold text-slate-700 mb-3">קבלת לידים</h3>
+            <p className="text-slate-600">צפה בדאשבורד ותגובי על הפוסטים הרלוונטיים ביותר</p>
           </ClayCard>
         </div>
+      </div>
 
-        {/* CTA */}
-        <ClayCard variant="elevated" className="text-center">
-          <h2 className="text-3xl font-bold text-slate-700 mb-4">
-            מוכן להתחיל למצוא לידים?
-          </h2>
-          <p className="text-lg text-slate-600 mb-8">
-            הצטרף לאלפי העסקים שכבר מגדילים את המכירות שלהם עם LeadFinder
-          </p>
-          <Link to="/register">
-            <ClayButton variant="primary" size="lg" className="text-xl px-12 py-4">
-              התחל בחינם היום
-            </ClayButton>
-          </Link>
+      {/* Pricing Section - moved here */}
+      <div className="mb-20">
+        <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+          תמחור פשוט ושקוף
+        </h2>
+        
+        <div className="max-w-md mx-auto">
+          <ClayCard variant="elevated" className="text-center relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+            
+            <div className="p-8">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Star className="w-8 h-8 text-green-700" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-slate-700 mb-4">מנוי חודשי</h3>
+              
+              <div className="mb-6">
+                <div className="text-5xl font-bold text-purple-600 mb-2">₪100</div>
+                <div className="text-slate-600">לחודש</div>
+              </div>
+              
+              <div className="bg-green-100 text-green-800 py-2 px-4 rounded-2xl mb-6 font-semibold">
+                ניסיון חינמי לֵ5 ימים
+              </div>
+              
+              <div className="space-y-3 mb-8 text-right">
+                <div className="flex items-center justify-start">
+                  <Check className="w-5 h-5 text-green-600 ml-3" />
+                  <span className="text-slate-700">סריקה אוטומטית יומית</span>
+                </div>
+                <div className="flex items-center justify-start">
+                  <Check className="w-5 h-5 text-green-600 ml-3" />
+                  <span className="text-slate-700">לידים בזמן אמת</span>
+                </div>
+                <div className="flex items-center justify-start">
+                  <Check className="w-5 h-5 text-green-600 ml-3" />
+                  <span className="text-slate-700">דאשבורד מתקדם</span>
+                </div>
+                <div className="flex items-center justify-start">
+                  <Check className="w-5 h-5 text-green-600 ml-3" />
+                  <span className="text-slate-700">ביטול בכל עת</span>
+                </div>
+              </div>
+              
+              <Link to="/register">
+                <ClayButton variant="primary" size="lg" className="w-full text-lg">
+                  התחל ניסיון חינמי
+                </ClayButton>
+              </Link>
+            </div>
+          </ClayCard>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="mb-20">
+        <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+          שאלות נפוצות
+        </h2>
+        
+        <ClayCard variant="elevated" className="max-w-4xl mx-auto">
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-slate-200 last:border-b-0">
+                <AccordionTrigger className="text-right text-lg font-semibold text-slate-700 hover:text-purple-600 py-6">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-right text-slate-600 leading-relaxed pb-6">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </ClayCard>
       </div>
+
+      {/* CTA */}
+      <ClayCard variant="elevated" className="text-center">
+        <h2 className="text-3xl font-bold text-slate-700 mb-4">
+          מוכן להתחיל למצוא לידים?
+        </h2>
+        <p className="text-lg text-slate-600 mb-8">
+          הצטרף לאלפי העסקים שכבר מגדילים את המכירות שלהם עם LeadFinder
+        </p>
+        <Link to="/register">
+          <ClayButton variant="primary" size="lg" className="text-xl px-12 py-4">
+            התחל בחינם היום
+          </ClayButton>
+        </Link>
+      </ClayCard>
     </div>
   );
 };
