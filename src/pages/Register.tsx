@@ -13,6 +13,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    password: '',
     businessType: '',
     targetArea: '',
     currentLeads: '',
@@ -24,31 +25,23 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Check if user is logged in
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const currentClient = localStorage.getItem('currentClient');
+    // Get temporary signup data
+    const tempSignupData = localStorage.getItem('tempSignupData');
     
-    if (!isLoggedIn) {
-      navigate('/login');
+    if (!tempSignupData) {
+      // If no signup data, redirect to signup
+      navigate('/signup');
       return;
     }
 
-    // Check if user already completed registration
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-      navigate('/dashboard');
-      return;
-    }
-
-    // Pre-fill user data from current client
-    if (currentClient) {
-      const client = JSON.parse(currentClient);
-      setFormData(prev => ({
-        ...prev,
-        name: client.name,
-        email: client.email
-      }));
-    }
+    // Pre-fill user data from signup
+    const signupData = JSON.parse(tempSignupData);
+    setFormData(prev => ({
+      ...prev,
+      name: signupData.name,
+      email: signupData.email,
+      password: signupData.password
+    }));
   }, [navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -63,9 +56,9 @@ const Register = () => {
     setIsLoading(true);
     
     try {
-      console.log('Sending registration data:', formData);
+      console.log('Sending complete registration data:', formData);
       
-      // Send data to N8N webhook
+      // Send complete data to N8N webhook including name, email, password
       const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/Register', {
         method: 'POST',
         headers: {
@@ -79,15 +72,15 @@ const Register = () => {
         
         toast({
           title: "נרשמת בהצלחה!",
-          description: "הבקשה נשלחה למערכת. נתחיל לחפש לידים רלוונטיים עבורך",
+          description: "הבקשה נשלחה למערכת. תוכל להתחבר לאחר אישור החשבון",
         });
 
-        // Store user data in localStorage - this marks registration as complete
-        localStorage.setItem('userData', JSON.stringify(formData));
+        // Clean up temporary data
+        localStorage.removeItem('tempSignupData');
         
-        // Navigate to dashboard
+        // Navigate to login page
         setTimeout(() => {
-          navigate('/dashboard');
+          navigate('/login');
         }, 1500);
       } else {
         throw new Error(`Registration failed with status: ${response.status}`);
@@ -121,6 +114,30 @@ const Register = () => {
 
         <ClayCard variant="elevated">
           <form onSubmit={handleSubmit} className="space-y-8">
+            {/* User Information (readonly) */}
+            <div>
+              <h3 className="text-xl font-semibold text-slate-700 mb-6">פרטי המשתמש</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <ClayInput
+                  label="שם מלא"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  disabled
+                />
+                <ClayInput
+                  label="דוא״ל"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  disabled
+                />
+              </div>
+            </div>
+
             {/* Business Information */}
             <div>
               <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
@@ -207,7 +224,7 @@ const Register = () => {
                 className="w-full text-xl"
                 disabled={isLoading}
               >
-                {isLoading ? 'שולח...' : 'התחל למצוא לידים'}
+                {isLoading ? 'שולח...' : 'השלם רישום'}
               </ClayButton>
             </div>
           </form>

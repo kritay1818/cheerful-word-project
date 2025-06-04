@@ -46,28 +46,15 @@ const Signup = () => {
     }
     
     try {
-      // Check if user already exists
-      const existingUser = localStorage.getItem(`user_${formData.email}`);
-      if (existingUser) {
-        toast({
-          title: "שגיאה",
-          description: "משתמש עם אימייל זה כבר קיים",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      // Store user credentials
-      const userCredentials = {
+      // Store signup data temporarily for the registration process
+      const signupData = {
         name: formData.name,
         email: formData.email,
         password: formData.password,
         createdAt: new Date().toISOString()
       };
       
-      localStorage.setItem(`user_${formData.email}`, JSON.stringify(userCredentials));
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', formData.email);
+      localStorage.setItem('tempSignupData', JSON.stringify(signupData));
       
       toast({
         title: "נרשמת בהצלחה!",

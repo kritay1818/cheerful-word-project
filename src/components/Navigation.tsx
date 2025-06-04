@@ -7,11 +7,13 @@ import { Target, LogIn, UserPlus } from 'lucide-react';
 const Navigation = () => {
   const location = useLocation();
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const hasSignupData = localStorage.getItem('tempSignupData');
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currentClient');
     localStorage.removeItem('userData'); // Keep for backward compatibility
+    localStorage.removeItem('tempSignupData'); // Clean up any temporary data
     window.location.href = '/';
   };
 
@@ -51,21 +53,31 @@ const Navigation = () => {
             </>
           ) : (
             <>
-              {location.pathname !== '/login' && (
-                <Link to="/login">
-                  <ClayButton variant="secondary" size="sm">
-                    <LogIn className="w-4 h-4 ml-2" />
-                    התחבר
-                  </ClayButton>
-                </Link>
-              )}
-              {location.pathname !== '/signup' && (
+              {location.pathname === '/register' && hasSignupData ? (
                 <Link to="/signup">
-                  <ClayButton variant="primary" size="sm">
-                    <UserPlus className="w-4 h-4 ml-2" />
-                    הירשם
+                  <ClayButton variant="secondary" size="sm">
+                    חזור להרשמה
                   </ClayButton>
                 </Link>
+              ) : (
+                <>
+                  {location.pathname !== '/login' && (
+                    <Link to="/login">
+                      <ClayButton variant="secondary" size="sm">
+                        <LogIn className="w-4 h-4 ml-2" />
+                        התחבר
+                      </ClayButton>
+                    </Link>
+                  )}
+                  {location.pathname !== '/signup' && (
+                    <Link to="/signup">
+                      <ClayButton variant="primary" size="sm">
+                        <UserPlus className="w-4 h-4 ml-2" />
+                        הירשם
+                      </ClayButton>
+                    </Link>
+                  )}
+                </>
               )}
             </>
           )}
