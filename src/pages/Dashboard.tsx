@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import LeadCard from '@/components/LeadCard';
 import ClayButton from '@/components/ClayButton';
-import { BarChart3, TrendingUp, Users, Target, Filter, RefreshCw } from 'lucide-react';
+import { BarChart3, TrendingUp, RefreshCw } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
@@ -87,10 +88,9 @@ const Dashboard = () => {
             title: post.text?.substring(0, 100) + '...' || 'פוסט ללא כותרת',
             description: post.text || 'אין תיאור זמין',
             location: post.category || 'לא צוין',
-            date: formatDate(post.created_at || post.scanned_at),
+            date: formatDate(post.scanned_at), // Always use scanned_at
             engagement: Math.floor(Math.random() * 30) + 5, // Mock engagement for now
             facebookUrl: post.url || post.group_url || '#',
-            relevanceScore: 85 + Math.floor(Math.random() * 15), // Mock relevance score
             posterProfile: post.poster_profile
           };
         });
@@ -203,10 +203,6 @@ const Dashboard = () => {
             <ClayButton variant="secondary" size="sm" onClick={handleRefresh} disabled={isLoading}>
               <RefreshCw className="w-4 h-4 ml-2" />
               רענן
-            </ClayButton>
-            <ClayButton variant="accent" size="sm">
-              <Filter className="w-4 h-4 ml-2" />
-              סנן
             </ClayButton>
           </div>
         </div>

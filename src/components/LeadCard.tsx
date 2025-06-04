@@ -11,25 +11,15 @@ interface LeadCardProps {
   date: string;
   engagement: number;
   facebookUrl: string;
-  relevanceScore: number;
   posterProfile?: string | null;
 }
 
-const LeadCard = ({ title, description, location, date, engagement, facebookUrl, relevanceScore, posterProfile }: LeadCardProps) => {
-  const getRelevanceColor = (score: number) => {
-    if (score >= 80) return 'from-green-200 to-green-300 text-green-800';
-    if (score >= 60) return 'from-yellow-200 to-yellow-300 text-yellow-800';
-    return 'from-orange-200 to-orange-300 text-orange-800';
-  };
-
+const LeadCard = ({ title, description, location, date, engagement, facebookUrl, posterProfile }: LeadCardProps) => {
   return (
     <ClayCard className="hover:shadow-[inset_0_2px_12px_rgba(255,255,255,0.8),inset_0_-2px_12px_rgba(0,0,0,0.05),0_16px_40px_rgba(0,0,0,0.25)] transform hover:-translate-y-1">
       <div className="space-y-4">
         <div className="flex justify-between items-start">
           <h3 className="text-lg font-semibold text-slate-700 leading-tight">{title}</h3>
-          <div className={`px-3 py-1 rounded-xl text-xs font-medium bg-gradient-to-r ${getRelevanceColor(relevanceScore)} shadow-[inset_0_1px_4px_rgba(255,255,255,0.5)]`}>
-            {relevanceScore}% רלוונטי
-          </div>
         </div>
         
         <p className="text-slate-600 text-sm leading-relaxed">{description}</p>
