@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
@@ -198,14 +197,12 @@ const Dashboard = () => {
     {
       title: "לידים חדשים השבוע",
       value: leads.length.toString(),
-      change: "+18%",
       icon: TrendingUp,
       color: "from-green-200 to-green-300 text-green-800"
     },
     {
       title: "שיעור הצלחה",
       value: successRate,
-      change: "+8%",
       icon: BarChart3,
       color: "from-yellow-200 to-yellow-300 text-yellow-800"
     }
@@ -249,8 +246,7 @@ const Dashboard = () => {
                 <stat.icon className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold text-slate-700 mb-1">{stat.value}</h3>
-              <p className="text-sm text-slate-600 mb-1">{stat.title}</p>
-              <p className="text-xs text-green-600 font-medium">{stat.change} מהשבוע שעבר</p>
+              <p className="text-sm text-slate-600">{stat.title}</p>
             </ClayCard>
           ))}
         </div>
