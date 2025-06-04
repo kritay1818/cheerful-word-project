@@ -10,8 +10,8 @@ const Navigation = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('userData');
+    localStorage.removeItem('currentClient');
+    localStorage.removeItem('userData'); // Keep for backward compatibility
     window.location.href = '/';
   };
 

@@ -56,6 +56,7 @@ export type Database = {
           id: number
           joined_at: string
           name: string
+          password: string | null
           Profession: string | null
           telegram_id: string | null
         }
@@ -66,6 +67,7 @@ export type Database = {
           id?: number
           joined_at?: string
           name: string
+          password?: string | null
           Profession?: string | null
           telegram_id?: string | null
         }
@@ -76,6 +78,7 @@ export type Database = {
           id?: number
           joined_at?: string
           name?: string
+          password?: string | null
           Profession?: string | null
           telegram_id?: string | null
         }

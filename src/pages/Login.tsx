@@ -7,6 +7,7 @@ import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
 import { toast } from '@/hooks/use-toast';
 import { LogIn, UserPlus } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -24,45 +26,52 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     try {
-      // For demo purposes, we'll simulate login
-      // In a real app, this would connect to your authentication service
-      
-      // Check if user exists in localStorage (simple demo)
-      const userData = localStorage.getItem('userData');
-      const userCredentials = localStorage.getItem(`user_${formData.email}`);
-      
-      if (userCredentials) {
-        const credentials = JSON.parse(userCredentials);
-        if (credentials.password === formData.password) {
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('currentUser', formData.email);
-          
-          toast({
-            title: "התחברת בהצלחה!",
-            description: "ברוך הבא למערכת LeadFinder",
-          });
-          
-          // Check if user has completed registration
-          if (userData) {
-            navigate('/dashboard');
-          } else {
-            navigate('/register');
-          }
-        } else {
-          throw new Error('Invalid credentials');
-        }
-      } else {
-        throw new Error('User not found');
+      // Query the Clients table to authenticate
+      const { data: client, error } = await supabase
+        .from('Clients')
+        .select('*')
+        .eq('email', formData.email)
+        .eq('password', formData.password)
+        .maybeSingle();
+
+      if (error) {
+        console.error('Database error:', error);
+        throw new Error('שגיאה בחיבור למסד הנתונים');
       }
+
+      if (!client) {
+        throw new Error('אימייל או סיסמה שגויים');
+      }
+
+      // Check if client is active
+      if (!client.active) {
+        throw new Error('החשבון שלך אינו פעיל. פנה לתמיכה');
+      }
+
+      // Store client info in localStorage for session management
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('currentClient', JSON.stringify(client));
+      
+      toast({
+        title: "התחברת בהצלחה!",
+        description: `ברוך הבא ${client.name}`,
+      });
+      
+      // Navigate to dashboard
+      navigate('/dashboard');
+      
     } catch (error) {
       console.error('Login error:', error);
       toast({
         title: "שגיאה בהתחברות",
-        description: "אימייל או סיסמה שגויים",
+        description: error instanceof Error ? error.message : "אימייל או סיסמה שגויים",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,8 +115,9 @@ const Login = () => {
               variant="primary" 
               size="lg" 
               className="w-full"
+              disabled={isLoading}
             >
-              התחבר
+              {isLoading ? 'מתחבר...' : 'התחבר'}
             </ClayButton>
           </form>
           

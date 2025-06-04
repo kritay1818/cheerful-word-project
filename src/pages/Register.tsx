@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -25,7 +26,7 @@ const Register = () => {
   useEffect(() => {
     // Check if user is logged in
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const currentUser = localStorage.getItem('currentUser');
+    const currentClient = localStorage.getItem('currentClient');
     
     if (!isLoggedIn) {
       navigate('/login');
@@ -39,17 +40,14 @@ const Register = () => {
       return;
     }
 
-    // Pre-fill user data from signup
-    if (currentUser) {
-      const userCredentials = localStorage.getItem(`user_${currentUser}`);
-      if (userCredentials) {
-        const credentials = JSON.parse(userCredentials);
-        setFormData(prev => ({
-          ...prev,
-          name: credentials.name,
-          email: credentials.email
-        }));
-      }
+    // Pre-fill user data from current client
+    if (currentClient) {
+      const client = JSON.parse(currentClient);
+      setFormData(prev => ({
+        ...prev,
+        name: client.name,
+        email: client.email
+      }));
     }
   }, [navigate]);
 
@@ -67,7 +65,7 @@ const Register = () => {
     try {
       console.log('Sending registration data:', formData);
       
-      // Send data to N8N webhook - corrected URL
+      // Send data to N8N webhook
       const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/Register', {
         method: 'POST',
         headers: {
