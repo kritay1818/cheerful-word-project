@@ -1,22 +1,11 @@
-
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import ClayButton from '@/components/ClayButton';
 import { Target, Users, TrendingUp, Zap, Facebook, BarChart3 } from 'lucide-react';
 
 const Index = () => {
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    // Check if user is logged in and redirect to dashboard
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (isLoggedIn) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
-
   const features = [
     {
       icon: Target,
