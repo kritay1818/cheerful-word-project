@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import ClayButton from '@/components/ClayButton';
-import { Target, Users, TrendingUp, Zap, Facebook, BarChart3 } from 'lucide-react';
+import { Target, Users, TrendingUp, Zap, Facebook, BarChart3, ChevronDown } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Index = () => {
   const features = [
@@ -40,6 +40,29 @@ const Index = () => {
       image: "/lovable-uploads/5ee621d2-133d-4c51-89d3-cc597306e47c.png",
       profession: "מתווך",
       location: "תל אביב"
+    }
+  ];
+
+  const faqItems = [
+    {
+      question: "איך המערכת מוצאת לידים בפייסבוק?",
+      answer: "המערכת שלנו משתמשת בבינה מלאכותית מתקדמת שסורקת פוסטים בקבוצות פייסבוק רלוונטיות ומזהה אנשים שמחפשים בדיוק את השירותים שאתם מציעים. האלגוריתם מנתח את התוכן של הפוסטים ומוצא התאמות מדויקות לעסק שלכם."
+    },
+    {
+      question: "כמה זמן לוקח לקבל תוצאות?",
+      answer: "אחרי ההרשמה וההגדרה הראשונית, תתחילו לקבל לידים תוך 24-48 שעות. המערכת עובדת ברציפות וממשיכה למצוא לידים חדשים על בסיס יומי."
+    },
+    {
+      question: "איך אני יודע שהלידים איכותיים?",
+      answer: "המערכת מנתחת את הקשר של הפוסטים, מיקום הכותב, ונתונים נוספים כדי לוודא שהלידים רלוונטיים. בנוסף, אתם מקבלים קישור ישיר לפוסט המקורי כדי שתוכלו לראות בדיוק מה האדם חיפש."
+    },
+    {
+      question: "האם זה חוקי לחפש לידים בפייסבוק?",
+      answer: "כן, המערכת עובדת אך ורק עם תוכן ציבורי הזמין לכולם בקבוצות פייסבוק. אנחנו לא ניגשים למידע פרטי ופועלים בהתאם לכל החוקים והתקנות הרלוונטיים."
+    },
+    {
+      question: "כמה זה עולה?",
+      answer: "אנחנו מציעים תכניות מחיר שונות המתאימות לכל סוג עסק. תוכלו להתחיל עם תקופת ניסיון חינמית ולבחור את התכנית שהכי מתאימה לכם אחרי שתראו את התוצאות."
     }
   ];
 
@@ -142,6 +165,28 @@ const Index = () => {
               <p className="text-slate-600">צפה בדאשבורד ותגובי על הפוסטים הרלוונטיים ביותר</p>
             </ClayCard>
           </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mb-20">
+          <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+            שאלות נפוצות
+          </h2>
+          
+          <ClayCard variant="elevated" className="max-w-4xl mx-auto">
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-slate-200 last:border-b-0">
+                  <AccordionTrigger className="text-right text-lg font-semibold text-slate-700 hover:text-purple-600 py-6">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-right text-slate-600 leading-relaxed pb-6">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </ClayCard>
         </div>
 
         {/* CTA */}
