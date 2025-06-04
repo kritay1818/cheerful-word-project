@@ -25,22 +25,27 @@ const LeadCard = ({ id, title, description, location, date, engagement, facebook
       if (clientData) {
         const client = JSON.parse(clientData);
         
+        console.log('Attempting to update click status for client:', client.id, 'post:', id);
+        
         // Update the clicked column in Client_post_match table
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from('Client_post_match')
           .update({ clicked: true })
           .eq('client_id', client.id)
-          .eq('post_id', id);
+          .eq('post_id', id)
+          .select();
 
         if (error) {
           console.error('Error updating click status:', error);
         } else {
-          console.log('Click tracked successfully');
-          // Call the callback to refresh stats
+          console.log('Click tracked successfully, updated data:', data);
+          // Call the callback to refresh stats immediately
           if (onPostClick) {
             onPostClick();
           }
         }
+      } else {
+        console.error('No client data found in localStorage');
       }
     } catch (error) {
       console.error('Error tracking click:', error);

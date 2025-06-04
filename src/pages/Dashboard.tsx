@@ -48,6 +48,8 @@ const Dashboard = () => {
 
   const calculateSuccessRate = async (clientId: number) => {
     try {
+      console.log('Calculating success rate for client:', clientId);
+      
       const { data: allMatches, error } = await supabase
         .from('Client_post_match')
         .select('clicked')
@@ -59,10 +61,13 @@ const Dashboard = () => {
         return '0%';
       }
 
+      console.log('All relevant matches for success rate:', allMatches);
+
       if (allMatches && allMatches.length > 0) {
         const clickedCount = allMatches.filter(match => match.clicked === true).length;
         const totalCount = allMatches.length;
         const rate = Math.round((clickedCount / totalCount) * 100);
+        console.log(`Success rate calculation: ${clickedCount}/${totalCount} = ${rate}%`);
         return `${rate}%`;
       }
 
@@ -134,6 +139,7 @@ const Dashboard = () => {
       // Calculate and set success rate
       const rate = await calculateSuccessRate(clientId);
       setSuccessRate(rate);
+      console.log('Final success rate set:', rate);
     } catch (error) {
       console.error('Unexpected error:', error);
       toast({
@@ -169,10 +175,12 @@ const Dashboard = () => {
   };
 
   const handlePostClick = async () => {
+    console.log('Post clicked, refreshing success rate...');
     // Refresh the success rate when a post is clicked
     if (userData?.id) {
       const rate = await calculateSuccessRate(userData.id);
       setSuccessRate(rate);
+      console.log('Success rate updated to:', rate);
     }
   };
 
