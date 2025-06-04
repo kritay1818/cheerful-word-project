@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -20,7 +21,7 @@ const Index = () => {
     {
       icon: TrendingUp,
       title: "סוכן AI שמוצא לך את מה שמתאים לך",
-      description: "דאשבורד מפורט עם נתונים על ביצועים, שיעורי הצלחה, ומגמות בזמן אמת"
+      description: "בינה מלאכותית מתקדמת שסורקת ומנתחת אלפי פוסטים ומוצאת בדיוק את הלקוחות שמחפשים את השירותים שלך"
     },
     {
       icon: Zap,
