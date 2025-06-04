@@ -28,17 +28,37 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    console.log('Attempting login with:', { email: formData.email, password: '***' });
+    console.log('Attempting login with:', { 
+      email: formData.email, 
+      emailLength: formData.email.length,
+      password: '***',
+      passwordLength: formData.password.length 
+    });
     
     try {
-      // Query the Clients table to authenticate
+      // First, let's check what emails exist in the database
+      const { data: allClients, error: allClientsError } = await supabase
+        .from('Clients')
+        .select('id, email, name, active');
+      
+      console.log('All clients in database:', allClients);
+      
+      // Now check for email match only
+      const { data: emailMatches, error: emailError } = await supabase
+        .from('Clients')
+        .select('*')
+        .eq('email', formData.email.trim());
+      
+      console.log('Email matches:', emailMatches);
+      
+      // Finally, check for both email and password
       const { data: clients, error } = await supabase
         .from('Clients')
         .select('*')
         .eq('email', formData.email.trim())
         .eq('password', formData.password);
 
-      console.log('Database query result:', { clients, error });
+      console.log('Email + password matches:', { clients, error });
 
       if (error) {
         console.error('Database error:', error);
@@ -47,7 +67,14 @@ const Login = () => {
 
       if (!clients || clients.length === 0) {
         console.log('No matching client found');
-        throw new Error('אימייל או סיסמה שגויים');
+        // Check if email exists but password is wrong
+        if (emailMatches && emailMatches.length > 0) {
+          console.log('Email exists but password mismatch');
+          throw new Error('אימייל או סיסמה שגויים');
+        } else {
+          console.log('Email not found in database');
+          throw new Error('אימייל או סיסמה שגויים');
+        }
       }
 
       const client = clients[0];
