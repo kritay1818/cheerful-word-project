@@ -21,11 +21,23 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
   }
 });
 
-// Test the connection on initialization
-supabase.from('Clients').select('count', { count: 'exact', head: true }).then(({ count, error }) => {
+// Test the connection on initialization with detailed error logging
+supabase.from('Clients').select('*').then(({ data, error, count }) => {
+  console.log('Detailed Clients table test:');
+  console.log('Error:', error);
+  console.log('Data:', data);
+  console.log('Count:', count);
+  console.log('Data length:', data?.length || 0);
+  
   if (error) {
     console.error('Supabase connection test failed:', error);
+    console.error('Error code:', error.code);
+    console.error('Error message:', error.message);
+    console.error('Error details:', error.details);
   } else {
-    console.log('Supabase connection test successful. Total clients in table:', count);
+    console.log('Supabase connection test successful. Total clients retrieved:', data?.length || 0);
+    if (data && data.length > 0) {
+      console.log('Sample client data:', data[0]);
+    }
   }
 });
