@@ -1,11 +1,22 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import ClayButton from '@/components/ClayButton';
 import { Target, Users, TrendingUp, Zap, Facebook, BarChart3 } from 'lucide-react';
 
 const Index = () => {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Check if user is logged in and redirect to dashboard
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
   const features = [
     {
       icon: Target,
@@ -38,32 +49,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
-      {/* Navigation */}
-      <nav className="bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 p-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-300 to-blue-300 flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3),0_4px_12px_rgba(0,0,0,0.15)]">
-              <Target className="w-6 h-6 text-purple-700" />
-            </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              LeadFinder
-            </h1>
-          </div>
-          
-          <div className="flex space-x-4">
-            <Link to="/login">
-              <ClayButton variant="secondary">
-                התחברות
-              </ClayButton>
-            </Link>
-            <Link to="/register">
-              <ClayButton variant="primary">
-                קבל 5 ימי ניסיון חינם
-              </ClayButton>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      {/* Use shared Navigation component */}
+      <Navigation />
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-16">
