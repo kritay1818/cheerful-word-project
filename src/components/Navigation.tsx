@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
@@ -21,14 +20,13 @@ const Navigation = () => {
     <nav className="bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 p-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3),0_4px_12px_rgba(0,0,0,0.15)]">
-            <img src="/lovable-uploads/048c0e4e-7629-4fdf-ae3a-1d432ec83916.png" alt="snipost logo" className="w-10 h-10 object-contain" />
-          </div>
+          <img src="/lovable-uploads/048c0e4e-7629-4fdf-ae3a-1d432ec83916.png" alt="snipost logo" className="w-12 h-12 object-contain" />
           <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
             snipost
           </h1>
         </Link>
 
+        
         <div className="flex items-center space-x-4">
           {location.pathname !== '/' && (
             <Link to="/">
