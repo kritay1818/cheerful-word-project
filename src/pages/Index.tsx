@@ -51,9 +51,11 @@ const Index = () => {
           </div>
           
           <div className="flex space-x-4">
-            <ClayButton variant="secondary">
-              התחברות
-            </ClayButton>
+            <Link to="/login">
+              <ClayButton variant="secondary">
+                התחברות
+              </ClayButton>
+            </Link>
             <Link to="/register">
               <ClayButton variant="primary">
                 קבל 5 ימי ניסיון חינם

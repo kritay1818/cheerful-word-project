@@ -87,6 +87,7 @@ export type Database = {
       Group_Posts: {
         Row: {
           category: string | null
+          comments_count: string | null
           created_at: string | null
           group_url: string | null
           id: number
@@ -97,6 +98,7 @@ export type Database = {
         }
         Insert: {
           category?: string | null
+          comments_count?: string | null
           created_at?: string | null
           group_url?: string | null
           id?: number
@@ -107,6 +109,7 @@ export type Database = {
         }
         Update: {
           category?: string | null
+          comments_count?: string | null
           created_at?: string | null
           group_url?: string | null
           id?: number
@@ -177,6 +180,7 @@ export type Database = {
         Args: { client_id_input: number }
         Returns: {
           category: string | null
+          comments_count: string | null
           created_at: string | null
           group_url: string | null
           id: number
