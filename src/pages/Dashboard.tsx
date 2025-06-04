@@ -91,7 +91,8 @@ const Dashboard = () => {
             date: formatDate(post.created_at || post.scanned_at),
             engagement: Math.floor(Math.random() * 30) + 5, // Mock engagement for now
             facebookUrl: post.url || post.group_url || '#',
-            relevanceScore: 85 + Math.floor(Math.random() * 15) // Mock relevance score
+            relevanceScore: 85 + Math.floor(Math.random() * 15), // Mock relevance score
+            posterProfile: post.poster_profile
           };
         });
         

@@ -2,7 +2,7 @@
 import React from 'react';
 import ClayCard from './ClayCard';
 import ClayButton from './ClayButton';
-import { ExternalLink, MapPin, Calendar, Users } from 'lucide-react';
+import { ExternalLink, MapPin, Calendar, Users, User } from 'lucide-react';
 
 interface LeadCardProps {
   title: string;
@@ -12,9 +12,10 @@ interface LeadCardProps {
   engagement: number;
   facebookUrl: string;
   relevanceScore: number;
+  posterProfile?: string | null;
 }
 
-const LeadCard = ({ title, description, location, date, engagement, facebookUrl, relevanceScore }: LeadCardProps) => {
+const LeadCard = ({ title, description, location, date, engagement, facebookUrl, relevanceScore, posterProfile }: LeadCardProps) => {
   const getRelevanceColor = (score: number) => {
     if (score >= 80) return 'from-green-200 to-green-300 text-green-800';
     if (score >= 60) return 'from-yellow-200 to-yellow-300 text-yellow-800';
@@ -33,7 +34,7 @@ const LeadCard = ({ title, description, location, date, engagement, facebookUrl,
         
         <p className="text-slate-600 text-sm leading-relaxed">{description}</p>
         
-        <div className="flex items-center justify-between text-xs text-slate-500">
+        <div className="flex items-center justify-between text-xs text-slate-500 flex-wrap gap-2">
           <div className="flex items-center space-x-1">
             <MapPin className="w-3 h-3" />
             <span>{location}</span>
@@ -46,6 +47,19 @@ const LeadCard = ({ title, description, location, date, engagement, facebookUrl,
             <Users className="w-3 h-3" />
             <span>{engagement} אינטראקציות</span>
           </div>
+          {posterProfile && (
+            <div className="flex items-center space-x-1">
+              <User className="w-3 h-3" />
+              <a 
+                href={posterProfile} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                פרופיל הכותב
+              </a>
+            </div>
+          )}
         </div>
         
         <div className="pt-2">
