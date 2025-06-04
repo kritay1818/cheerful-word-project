@@ -43,7 +43,7 @@ export type Database = {
             foreignKeyName: "Client_post_match_post_id_fkey"
             columns: ["post_id"]
             isOneToOne: false
-            referencedRelation: "Group_posts"
+            referencedRelation: "Group_Posts"
             referencedColumns: ["id"]
           },
         ]
@@ -55,8 +55,8 @@ export type Database = {
           filter_request: string | null
           id: number
           joined_at: string
-          name: string | null
-          profession: string | null
+          name: string
+          Profession: string | null
           telegram_id: string | null
         }
         Insert: {
@@ -65,8 +65,8 @@ export type Database = {
           filter_request?: string | null
           id?: number
           joined_at?: string
-          name?: string | null
-          profession?: string | null
+          name: string
+          Profession?: string | null
           telegram_id?: string | null
         }
         Update: {
@@ -75,13 +75,13 @@ export type Database = {
           filter_request?: string | null
           id?: number
           joined_at?: string
-          name?: string | null
-          profession?: string | null
+          name?: string
+          Profession?: string | null
           telegram_id?: string | null
         }
         Relationships: []
       }
-      Group_posts: {
+      Group_Posts: {
         Row: {
           category: string | null
           created_at: string | null
@@ -116,37 +116,73 @@ export type Database = {
       }
       Groups: {
         Row: {
-          active: string | null
+          active: boolean | null
           category: string | null
           created_at: string
           id: number
-          name: string | null
-          url: string | null
+          name: string
+          url: string
         }
         Insert: {
-          active?: string | null
+          active?: boolean | null
           category?: string | null
           created_at?: string
           id?: number
-          name?: string | null
-          url?: string | null
+          name: string
+          url: string
         }
         Update: {
-          active?: string | null
+          active?: boolean | null
           category?: string | null
           created_at?: string
           id?: number
-          name?: string | null
-          url?: string | null
+          name?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      Posts: {
+        Row: {
+          created_at: string
+          url: string
+          userID: string
+        }
+        Insert: {
+          created_at?: string
+          url: string
+          userID: string
+        }
+        Update: {
+          created_at?: string
+          url?: string
+          userID?: string
         }
         Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      user_post_counts: {
+        Row: {
+          total_urls: number | null
+          userID: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      get_unmatched_group_posts: {
+        Args: { client_id_input: number }
+        Returns: {
+          category: string | null
+          created_at: string | null
+          group_url: string | null
+          id: number
+          poster_profile: string | null
+          scanned_at: string
+          text: string | null
+          url: string | null
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
