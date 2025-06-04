@@ -32,11 +32,6 @@ const Index = () => {
 
   const chatExamples = [
     {
-      image: "/lovable-uploads/306b6389-bb5f-4466-a64a-d4a6094047e1.png",
-      profession: "יועץ עסקי",
-      location: "נהריה"
-    },
-    {
       image: "/lovable-uploads/639276d5-6e98-4ba6-8788-4c25ea8e3e80.png",
       profession: "משווק דיגיטלי",
       location: "ראשון לציון"
@@ -82,21 +77,6 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Chat Examples */}
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
-          {chatExamples.map((example, index) => (
-            <ClayCard key={index} className="text-center overflow-hidden">
-              <img 
-                src={example.image} 
-                alt={`דוגמה לשיחה עם ${example.profession}`}
-                className="w-full h-48 object-cover rounded-2xl mb-4"
-              />
-              <h3 className="text-lg font-semibold text-slate-700 mb-1">{example.profession}</h3>
-              <p className="text-slate-600">{example.location}</p>
-            </ClayCard>
-          ))}
-        </div>
-
         {/* Features */}
         <div className="mb-20">
           <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
@@ -114,6 +94,21 @@ const Index = () => {
               </ClayCard>
             ))}
           </div>
+        </div>
+
+        {/* Chat Examples */}
+        <div className="grid md:grid-cols-2 gap-6 mb-20">
+          {chatExamples.map((example, index) => (
+            <ClayCard key={index} className="text-center overflow-hidden">
+              <img 
+                src={example.image} 
+                alt={`דוגמה לשיחה עם ${example.profession}`}
+                className="w-full h-32 object-cover object-top rounded-2xl mb-4"
+              />
+              <h3 className="text-lg font-semibold text-slate-700 mb-1">{example.profession}</h3>
+              <p className="text-slate-600">{example.location}</p>
+            </ClayCard>
+          ))}
         </div>
 
         {/* How it works */}
