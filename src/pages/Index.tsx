@@ -49,10 +49,10 @@ const Index = () => {
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-slate-700 mb-6 leading-tight">
-            מצא לידים באמצעות
+            תפסיק לפספס לידים
             <br />
             <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              פייסבוק
+              בפייסבוק!
             </span>
           </h1>
           
@@ -61,15 +61,12 @@ const Index = () => {
             ומספקת לך רשימה מסודרת של הזדמנויות עסקיות איכותיות
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center">
             <Link to="/register">
               <ClayButton variant="primary" size="lg" className="text-xl px-12 py-4">
                 התחל למצוא לידים
               </ClayButton>
             </Link>
-            <ClayButton variant="secondary" size="lg" className="text-xl px-12 py-4">
-              צפה בדמו
-            </ClayButton>
           </div>
         </div>
 
