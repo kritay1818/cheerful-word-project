@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
@@ -143,20 +142,6 @@ const Dashboard = () => {
       change: "+18%",
       icon: TrendingUp,
       color: "from-green-200 to-green-300 text-green-800"
-    },
-    {
-      title: "ציון רלוונטיות ממוצע",
-      value: "81%",
-      change: "+5%",
-      icon: Target,
-      color: "from-blue-200 to-blue-300 text-blue-800"
-    },
-    {
-      title: "אינטראקציות ממוצעות",
-      value: "14.5",
-      change: "+12%",
-      icon: Users,
-      color: "from-purple-200 to-purple-300 text-purple-800"
     },
     {
       title: "שיעור הצלחה",
