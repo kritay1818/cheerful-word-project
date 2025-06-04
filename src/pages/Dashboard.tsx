@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
@@ -198,14 +197,12 @@ const Dashboard = () => {
     {
       title: "לידים חדשים השבוע",
       value: leads.length.toString(),
-      change: "+18%",
       icon: TrendingUp,
       color: "from-green-200 to-green-300 text-green-800"
     },
     {
       title: "שיעור הצלחה",
       value: successRate,
-      change: "+8%",
       icon: BarChart3,
       color: "from-yellow-200 to-yellow-300 text-yellow-800"
     }
@@ -241,16 +238,15 @@ const Dashboard = () => {
           </ClayCard>
         </div>
 
-        {/* Stats Grid - Updated responsive layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+        {/* Stats Grid - Full width responsive layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {stats.map((stat, index) => (
             <ClayCard key={index} className="text-center">
               <div className={`w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]`}>
                 <stat.icon className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold text-slate-700 mb-1">{stat.value}</h3>
-              <p className="text-sm text-slate-600 mb-1">{stat.title}</p>
-              <p className="text-xs text-green-600 font-medium">{stat.change} מהשבוע שעבר</p>
+              <p className="text-sm text-slate-600">{stat.title}</p>
             </ClayCard>
           ))}
         </div>
