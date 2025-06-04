@@ -30,11 +30,22 @@ const Index = () => {
     }
   ];
 
-  const stats = [
-    { number: "10,000+", label: "לידים נמצאו" },
-    { number: "500+", label: "עסקים מרוצים" },
-    { number: "85%", label: "שיעור הצלחה" },
-    { number: "24/7", label: "פעילות רציפה" }
+  const chatExamples = [
+    {
+      image: "/lovable-uploads/306b6389-bb5f-4466-a64a-d4a6094047e1.png",
+      profession: "יועץ עסקי",
+      location: "נהריה"
+    },
+    {
+      image: "/lovable-uploads/639276d5-6e98-4ba6-8788-4c25ea8e3e80.png",
+      profession: "משווק דיגיטלי",
+      location: "ראשון לציון"
+    },
+    {
+      image: "/lovable-uploads/5ee621d2-133d-4c51-89d3-cc597306e47c.png",
+      profession: "מתווך",
+      location: "תל אביב"
+    }
   ];
 
   return (
@@ -50,10 +61,10 @@ const Index = () => {
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-slate-700 mb-6 leading-tight">
-            תפסיק לפספס לידים
+            אתה מפספס לידים בפייסבוק,
             <br />
             <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              בפייסבוק!
+              תן ל-AI למצוא אותם בשבילך
             </span>
           </h1>
           
@@ -71,12 +82,17 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-          {stats.map((stat, index) => (
-            <ClayCard key={index} className="text-center">
-              <h3 className="text-3xl font-bold text-slate-700 mb-2">{stat.number}</h3>
-              <p className="text-slate-600">{stat.label}</p>
+        {/* Chat Examples */}
+        <div className="grid md:grid-cols-3 gap-6 mb-20">
+          {chatExamples.map((example, index) => (
+            <ClayCard key={index} className="text-center overflow-hidden">
+              <img 
+                src={example.image} 
+                alt={`דוגמה לשיחה עם ${example.profession}`}
+                className="w-full h-48 object-cover rounded-2xl mb-4"
+              />
+              <h3 className="text-lg font-semibold text-slate-700 mb-1">{example.profession}</h3>
+              <p className="text-slate-600">{example.location}</p>
             </ClayCard>
           ))}
         </div>
