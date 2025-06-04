@@ -5,63 +5,140 @@ import ClayCard from '@/components/ClayCard';
 import LeadCard from '@/components/LeadCard';
 import ClayButton from '@/components/ClayButton';
 import { BarChart3, TrendingUp, Users, Target, Filter, RefreshCw } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
+
+interface Post {
+  id: number;
+  text: string | null;
+  url: string | null;
+  group_url: string | null;
+  poster_profile: string | null;
+  category: string | null;
+  created_at: string | null;
+  scanned_at: string;
+}
+
+interface ClientPostMatch {
+  id: number;
+  client_id: number | null;
+  post_id: number | null;
+  is_relevant: boolean | null;
+  created_at: string;
+  Group_Posts: Post;
+}
 
 const Dashboard = () => {
   const [userData, setUserData] = useState<any>(null);
-  const [leads, setLeads] = useState([
-    {
-      id: 1,
-      title: "מחפש עורך דין למשפט משפחה בתל אביב",
-      description: "שלום, אני צריך עורך דין מנוסה בתחום משפט המשפחה. מעוניין בייצוג בתיק גירושין מורכב. אשמח לקבל המלצות על עורכי דין איכותיים באזור תל אביב.",
-      location: "תל אביב",
-      date: "לפני 2 שעות",
-      engagement: 15,
-      facebookUrl: "https://facebook.com/groups/legal-advice-tlv/posts/123",
-      relevanceScore: 95
-    },
-    {
-      id: 2,
-      title: "עזרה בחישוב מס הכנסה לעצמאי",
-      description: "היי חברים, אני עצמאי ומתקשה להבין איך לחשב נכון את מס הכנסה לשנה הבאה. מישהו יכול להמליץ על רואה חשבון טוב שמתמחה בעצמאים?",
-      location: "רמת גן",
-      date: "לפני 4 שעות",
-      engagement: 8,
-      facebookUrl: "https://facebook.com/groups/freelancers-israel/posts/456",
-      relevanceScore: 87
-    },
-    {
-      id: 3,
-      title: "מחפשת קוסמטיקאית לטיפוח פנים",
-      description: "בנות, אני מחפשת קוסמטיקאית מקצועית לטיפוח פנים. רוצה מישהי שמתמחה בטיפולי אנטי אייג'ינג ויודעת לעבוד עם עור רגיש. באזור פתח תקווה או השכונות.",
-      location: "פתח תקווה",
-      date: "לפני 6 שעות",
-      engagement: 23,
-      facebookUrl: "https://facebook.com/groups/beauty-petach-tikva/posts/789",
-      relevanceScore: 78
-    },
-    {
-      id: 4,
-      title: "ייעוץ עסקי לסטארטאפ טכנולוגי",
-      description: "אנחנו סטארטאפ טכנולוגי בשלבים מוקדמים ומחפשים יועץ עסקי עם ניסיון בתחום הטכנולוגיה. מישהו יכול להמליץ על יועץ איכותי שמבין בפיתוח מוצר ובגיוס השקעות?",
-      location: "הרצליה",
-      date: "לפני 8 שעות",
-      engagement: 12,
-      facebookUrl: "https://facebook.com/groups/startup-israel/posts/101",
-      relevanceScore: 65
-    }
-  ]);
+  const [leads, setLeads] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const data = localStorage.getItem('userData');
+    const data = localStorage.getItem('currentClient');
     if (data) {
-      setUserData(JSON.parse(data));
+      const client = JSON.parse(data);
+      setUserData(client);
+      fetchUserLeads(client.id);
+    } else {
+      setIsLoading(false);
     }
   }, []);
+
+  const fetchUserLeads = async (clientId: number) => {
+    try {
+      console.log('Fetching leads for client ID:', clientId);
+      
+      const { data: matches, error } = await supabase
+        .from('Client_post_match')
+        .select(`
+          *,
+          Group_Posts (
+            id,
+            text,
+            url,
+            group_url,
+            poster_profile,
+            category,
+            created_at,
+            scanned_at
+          )
+        `)
+        .eq('client_id', clientId)
+        .eq('is_relevant', true)
+        .order('created_at', { ascending: false });
+
+      console.log('Client post matches:', { matches, error });
+
+      if (error) {
+        console.error('Error fetching leads:', error);
+        toast({
+          title: "שגיאה בטעינת הלידים",
+          description: "לא הצלחנו לטעון את הלידים שלך",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (matches && matches.length > 0) {
+        // Transform the data to match LeadCard props
+        const transformedLeads = matches.map((match: ClientPostMatch) => {
+          const post = match.Group_Posts;
+          return {
+            id: post.id,
+            title: post.text?.substring(0, 100) + '...' || 'פוסט ללא כותרת',
+            description: post.text || 'אין תיאור זמין',
+            location: post.category || 'לא צוין',
+            date: formatDate(post.created_at || post.scanned_at),
+            engagement: Math.floor(Math.random() * 30) + 5, // Mock engagement for now
+            facebookUrl: post.url || post.group_url || '#',
+            relevanceScore: 85 + Math.floor(Math.random() * 15) // Mock relevance score
+          };
+        });
+        
+        setLeads(transformedLeads);
+        console.log('Transformed leads:', transformedLeads);
+      } else {
+        console.log('No relevant posts found for this client');
+        setLeads([]);
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "שגיאה",
+        description: "אירעה שגיאה בטעינת הנתונים",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'לפני פחות משעה';
+    if (diffInHours < 24) return `לפני ${diffInHours} שעות`;
+    
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays === 1) return 'לפני יום';
+    if (diffInDays < 7) return `לפני ${diffInDays} ימים`;
+    
+    return date.toLocaleDateString('he-IL');
+  };
+
+  const handleRefresh = () => {
+    if (userData?.id) {
+      setIsLoading(true);
+      fetchUserLeads(userData.id);
+    }
+  };
 
   const stats = [
     {
       title: "לידים חדשים השבוע",
-      value: "24",
+      value: leads.length.toString(),
       change: "+18%",
       icon: TrendingUp,
       color: "from-green-200 to-green-300 text-green-800"
@@ -89,10 +166,18 @@ const Dashboard = () => {
     }
   ];
 
-  const handleRefresh = () => {
-    // Simulate refreshing leads
-    console.log('Refreshing leads...');
-  };
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+        <Navigation />
+        <div className="max-w-7xl mx-auto p-6 pt-20">
+          <div className="text-center">
+            <p className="text-lg text-slate-600">טוען לידים...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
@@ -106,7 +191,7 @@ const Dashboard = () => {
               שלום {userData?.name || 'משתמש'}! 👋
             </h1>
             <p className="text-lg text-slate-600">
-              הנה הלידים החדשים שמצאנו עבור {userData?.businessName || 'העסק שלך'}
+              הנה הלידים החדשים שמצאנו עבור {userData?.Profession || 'העסק שלך'}
             </p>
           </ClayCard>
         </div>
@@ -129,7 +214,7 @@ const Dashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold text-slate-700">לידים חדשים</h2>
           <div className="flex space-x-4">
-            <ClayButton variant="secondary" size="sm" onClick={handleRefresh}>
+            <ClayButton variant="secondary" size="sm" onClick={handleRefresh} disabled={isLoading}>
               <RefreshCw className="w-4 h-4 ml-2" />
               רענן
             </ClayButton>
@@ -141,18 +226,30 @@ const Dashboard = () => {
         </div>
 
         {/* Leads Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {leads.map((lead) => (
-            <LeadCard key={lead.id} {...lead} />
-          ))}
-        </div>
+        {leads.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {leads.map((lead) => (
+              <LeadCard key={lead.id} {...lead} />
+            ))}
+          </div>
+        ) : (
+          <ClayCard className="text-center py-12">
+            <h3 className="text-xl font-semibold text-slate-700 mb-2">אין לידים חדשים</h3>
+            <p className="text-slate-600 mb-4">לא מצאנו לידים רלוונטיים עבורך בזמן האחרון</p>
+            <ClayButton variant="primary" onClick={handleRefresh}>
+              בדוק שוב
+            </ClayButton>
+          </ClayCard>
+        )}
 
         {/* Load More */}
-        <div className="text-center">
-          <ClayButton variant="primary" size="lg">
-            טען עוד לידים
-          </ClayButton>
-        </div>
+        {leads.length > 0 && (
+          <div className="text-center">
+            <ClayButton variant="primary" size="lg">
+              טען עוד לידים
+            </ClayButton>
+          </div>
+        )}
       </div>
     </div>
   );
