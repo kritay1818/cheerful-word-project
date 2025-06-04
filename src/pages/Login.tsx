@@ -28,23 +28,30 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
+    console.log('Attempting login with:', { email: formData.email, password: '***' });
+    
     try {
       // Query the Clients table to authenticate
-      const { data: client, error } = await supabase
+      const { data: clients, error } = await supabase
         .from('Clients')
         .select('*')
-        .eq('email', formData.email)
-        .eq('password', formData.password)
-        .maybeSingle();
+        .eq('email', formData.email.trim())
+        .eq('password', formData.password);
+
+      console.log('Database query result:', { clients, error });
 
       if (error) {
         console.error('Database error:', error);
         throw new Error('שגיאה בחיבור למסד הנתונים');
       }
 
-      if (!client) {
+      if (!clients || clients.length === 0) {
+        console.log('No matching client found');
         throw new Error('אימייל או סיסמה שגויים');
       }
+
+      const client = clients[0];
+      console.log('Found client:', { id: client.id, name: client.name, active: client.active });
 
       // Check if client is active
       if (!client.active) {
@@ -54,6 +61,8 @@ const Login = () => {
       // Store client info in localStorage for session management
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('currentClient', JSON.stringify(client));
+      
+      console.log('Login successful, stored client data');
       
       toast({
         title: "התחברת בהצלחה!",
