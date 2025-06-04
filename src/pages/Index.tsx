@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import ClayButton from '@/components/ClayButton';
-import { Target, Users, TrendingUp, Zap, Facebook, BarChart3, ChevronDown } from 'lucide-react';
+import { Target, Users, TrendingUp, Zap, Facebook, BarChart3, ChevronDown, Check, Star } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Index = () => {
@@ -62,7 +63,7 @@ const Index = () => {
     },
     {
       question: "כמה זה עולה?",
-      answer: "אנחנו מציעים תכניות מחיר שונות המתאימות לכל סוג עסק. תוכלו להתחיל עם תקופת ניסיון חינמית ולבחור את התכנית שהכי מתאימה לכם אחרי שתראו את התוצאות."
+      answer: "אנחנו מציעים מנוי ניסיון חינמי של 5 ימים, ולאחר מכן מנוי חודשי בעלות של 100 שקל לחודש. תוכלו לבטל בכל זמן."
     }
   ];
 
@@ -116,6 +117,61 @@ const Index = () => {
                 <p className="text-slate-600 leading-relaxed">{feature.description}</p>
               </ClayCard>
             ))}
+          </div>
+        </div>
+
+        {/* Pricing Section */}
+        <div className="mb-20">
+          <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+            תמחור פשוט ושקוף
+          </h2>
+          
+          <div className="max-w-md mx-auto">
+            <ClayCard variant="elevated" className="text-center relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+              
+              <div className="p-8">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-green-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                  <Star className="w-8 h-8 text-green-700" />
+                </div>
+                
+                <h3 className="text-2xl font-bold text-slate-700 mb-4">מנוי חודשי</h3>
+                
+                <div className="mb-6">
+                  <div className="text-5xl font-bold text-purple-600 mb-2">₪100</div>
+                  <div className="text-slate-600">לחודש</div>
+                </div>
+                
+                <div className="bg-green-100 text-green-800 py-2 px-4 rounded-2xl mb-6 font-semibold">
+                  ניסיון חינמי לֵ5 ימים
+                </div>
+                
+                <div className="space-y-3 mb-8 text-right">
+                  <div className="flex items-center justify-start">
+                    <Check className="w-5 h-5 text-green-600 ml-3" />
+                    <span className="text-slate-700">סריקה אוטומטית יומית</span>
+                  </div>
+                  <div className="flex items-center justify-start">
+                    <Check className="w-5 h-5 text-green-600 ml-3" />
+                    <span className="text-slate-700">לידים בזמן אמת</span>
+                  </div>
+                  <div className="flex items-center justify-start">
+                    <Check className="w-5 h-5 text-green-600 ml-3" />
+                    <span className="text-slate-700">דאשבורד מתקדם</span>
+                  </div>
+                  <div className="flex items-center justify-start">
+                    <Check className="w-5 h-5 text-green-600 ml-3" />
+                    <span className="text-slate-700">ביטול בכל עת</span>
+                  </div>
+                </div>
+                
+                <Link to="/register">
+                  <ClayButton variant="primary" size="lg" className="w-full text-lg">
+                    התחל ניסיון חינמי
+                  </ClayButton>
+                </Link>
+              </div>
+            </ClayCard>
           </div>
         </div>
 
