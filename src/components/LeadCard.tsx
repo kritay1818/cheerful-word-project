@@ -27,6 +27,35 @@ const LeadCard = ({ id, title, description, location, date, engagement, facebook
         
         console.log('Attempting to update click status for client:', client.id, 'post:', id);
         
+        // First, let's check if the record exists before trying to update
+        const { data: existingRecord, error: selectError } = await supabase
+          .from('Client_post_match')
+          .select('*')
+          .eq('client_id', client.id)
+          .eq('post_id', id);
+
+        console.log('Existing record check:', { existingRecord, selectError });
+
+        if (selectError) {
+          console.error('Error checking existing record:', selectError);
+          return;
+        }
+
+        if (!existingRecord || existingRecord.length === 0) {
+          console.error('No matching record found in Client_post_match table for client:', client.id, 'post:', id);
+          
+          // Let's also check what records exist for this client
+          const { data: allClientRecords, error: allRecordsError } = await supabase
+            .from('Client_post_match')
+            .select('*')
+            .eq('client_id', client.id);
+          
+          console.log('All records for client:', client.id, allClientRecords);
+          return;
+        }
+
+        console.log('Found existing record, proceeding with update...');
+        
         // Update the clicked column in Client_post_match table
         const { data, error } = await supabase
           .from('Client_post_match')
