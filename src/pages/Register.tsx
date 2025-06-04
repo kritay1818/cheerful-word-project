@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -5,24 +6,19 @@ import ClayCard from '@/components/ClayCard';
 import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
 import { toast } from '@/hooks/use-toast';
-import { UserPlus, Building, MapPin, Target, MessageCircle } from 'lucide-react';
+import { UserPlus, Building, Target } from 'lucide-react';
 
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    businessName: '',
     businessType: '',
-    location: '',
     targetArea: '',
     currentLeads: '',
     targetLeads: '',
     businessDescription: '',
-    targetAudience: '',
-    telegramUsername: '',
-    whatsappNumber: ''
+    specificRequests: ''
   });
 
   useEffect(() => {
@@ -117,70 +113,6 @@ const Register = () => {
 
         <ClayCard variant="elevated">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Personal Information */}
-            <div>
-              <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
-                <UserPlus className="w-5 h-5 text-purple-600" />
-                <span>פרטים אישיים</span>
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <ClayInput
-                  label="שם מלא"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="השם המלא שלך"
-                />
-                <ClayInput
-                  label="דוא״ל"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="email@example.com"
-                />
-                <ClayInput
-                  label="טלפון"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  placeholder="050-1234567"
-                />
-              </div>
-            </div>
-
-            {/* Communication Channels */}
-            <div>
-              <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
-                <MessageCircle className="w-5 h-5 text-blue-600" />
-                <span>ערוצי תקשורת לקבלת לידים</span>
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <ClayInput
-                  label="שם משתמש בטלגרם"
-                  name="telegramUsername"
-                  value={formData.telegramUsername}
-                  onChange={handleChange}
-                  placeholder="@username (ללא ה@)"
-                />
-                <ClayInput
-                  label="מספר וואטסאפ"
-                  name="whatsappNumber"
-                  type="tel"
-                  value={formData.whatsappNumber}
-                  onChange={handleChange}
-                  placeholder="972501234567"
-                />
-              </div>
-              <p className="text-sm text-slate-500 mt-3">
-                הלידים יישלחו אליך דרך הערוצים שתבחר להזין
-              </p>
-            </div>
-
             {/* Business Information */}
             <div>
               <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
@@ -189,28 +121,12 @@ const Register = () => {
               </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <ClayInput
-                  label="שם העסק"
-                  name="businessName"
-                  value={formData.businessName}
-                  onChange={handleChange}
-                  required
-                  placeholder="שם העסק שלך"
-                />
-                <ClayInput
                   label="סוג העסק"
                   name="businessType"
                   value={formData.businessType}
                   onChange={handleChange}
                   required
                   placeholder="למשל: עורך דין, רואה חשבון, קוסמטיקאית"
-                />
-                <ClayInput
-                  label="מיקום העסק"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                  placeholder="עיר או אזור"
                 />
                 <ClayInput
                   label="אזור הפעילות"
@@ -224,13 +140,25 @@ const Register = () => {
               
               <div className="mt-6">
                 <ClayInput
-                  label="תיאור העסק"
+                  label="תיאור העסק (אופציונלי)"
                   name="businessDescription"
                   value={formData.businessDescription}
                   onChange={handleChange}
                   multiline
                   rows={4}
                   placeholder="ספר על העסק שלך, השירותים שאתה נותן, והיתרונות שלך"
+                />
+              </div>
+
+              <div className="mt-6">
+                <ClayInput
+                  label="בקשות ספציפיות ללידים (אופציונלי)"
+                  name="specificRequests"
+                  value={formData.specificRequests}
+                  onChange={handleChange}
+                  multiline
+                  rows={3}
+                  placeholder="האם יש לך בקשות מיוחדות או קריטריונים ספציפיים ללידים?"
                 />
               </div>
             </div>
@@ -259,18 +187,6 @@ const Register = () => {
                   onChange={handleChange}
                   required
                   placeholder="יעד הלידים החודשי"
-                />
-              </div>
-              
-              <div className="mt-6">
-                <ClayInput
-                  label="קהל היעד שלך"
-                  name="targetAudience"
-                  value={formData.targetAudience}
-                  onChange={handleChange}
-                  multiline
-                  rows={3}
-                  placeholder="תאר את הלקוחות האידיאליים שלך - גיל, מיקום, תחומי עניין וכו'"
                 />
               </div>
             </div>
