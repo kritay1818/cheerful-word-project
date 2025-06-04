@@ -39,6 +39,10 @@ const LeadCard = ({ id, title, description, location, date, engagement, facebook
           console.error('Error updating click status:', error);
         } else {
           console.log('Click tracked successfully, updated data:', data);
+          
+          // Wait a moment for the database to commit the change
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
           // Call the callback to refresh stats immediately
           if (onPostClick) {
             onPostClick();

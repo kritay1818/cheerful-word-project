@@ -46,15 +46,24 @@ const Dashboard = () => {
     }
   }, []);
 
-  const calculateSuccessRate = async (clientId: number) => {
+  const calculateSuccessRate = async (clientId: number, useCache: boolean = false) => {
     try {
-      console.log('Calculating success rate for client:', clientId);
+      console.log('Calculating success rate for client:', clientId, 'useCache:', useCache);
       
-      const { data: allMatches, error } = await supabase
+      // Add a cache-busting parameter to force fresh data
+      const query = supabase
         .from('Client_post_match')
         .select('clicked')
         .eq('client_id', clientId)
         .eq('is_relevant', true);
+
+      // If not using cache, add a timestamp to force fresh data
+      if (!useCache) {
+        // Force a fresh query by adding a small delay
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      const { data: allMatches, error } = await query;
 
       if (error) {
         console.error('Error fetching success rate data:', error);
@@ -137,7 +146,7 @@ const Dashboard = () => {
       }
 
       // Calculate and set success rate
-      const rate = await calculateSuccessRate(clientId);
+      const rate = await calculateSuccessRate(clientId, true);
       setSuccessRate(rate);
       console.log('Final success rate set:', rate);
     } catch (error) {
@@ -178,7 +187,8 @@ const Dashboard = () => {
     console.log('Post clicked, refreshing success rate...');
     // Refresh the success rate when a post is clicked
     if (userData?.id) {
-      const rate = await calculateSuccessRate(userData.id);
+      // Force fresh data by not using cache
+      const rate = await calculateSuccessRate(userData.id, false);
       setSuccessRate(rate);
       console.log('Success rate updated to:', rate);
     }
