@@ -104,7 +104,7 @@ const Index = () => {
       {/* Features */}
       <div className="mb-20">
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
-          למה לבחור ב-LeadFinder?
+          למה לבחור ב-snipost?
         </h2>
         
         <div className="grid md:grid-cols-2 gap-8">
@@ -251,7 +251,7 @@ const Index = () => {
           מוכן להתחיל למצוא לידים?
         </h2>
         <p className="text-lg text-slate-600 mb-8">
-          הצטרף לאלפי העסקים שכבר מגדילים את המכירות שלהם עם LeadFinder
+          הצטרף לאלפי העסקים שכבר מגדילים את המכירות שלהם עם snipost
         </p>
         <Link to="/register">
           <ClayButton variant="primary" size="lg" className="text-xl px-12 py-4">
