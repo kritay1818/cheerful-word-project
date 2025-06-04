@@ -24,6 +24,7 @@ interface ClientPostMatch {
   client_id: number | null;
   post_id: number | null;
   is_relevant: boolean | null;
+  clicked: boolean | null;
   created_at: string;
   Group_Posts: Post;
 }
@@ -31,6 +32,7 @@ interface ClientPostMatch {
 const Dashboard = () => {
   const [userData, setUserData] = useState<any>(null);
   const [leads, setLeads] = useState<any[]>([]);
+  const [successRate, setSuccessRate] = useState<string>('0%');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -43,6 +45,33 @@ const Dashboard = () => {
       setIsLoading(false);
     }
   }, []);
+
+  const calculateSuccessRate = async (clientId: number) => {
+    try {
+      const { data: allMatches, error } = await supabase
+        .from('Client_post_match')
+        .select('clicked')
+        .eq('client_id', clientId)
+        .eq('is_relevant', true);
+
+      if (error) {
+        console.error('Error fetching success rate data:', error);
+        return '0%';
+      }
+
+      if (allMatches && allMatches.length > 0) {
+        const clickedCount = allMatches.filter(match => match.clicked === true).length;
+        const totalCount = allMatches.length;
+        const rate = Math.round((clickedCount / totalCount) * 100);
+        return `${rate}%`;
+      }
+
+      return '0%';
+    } catch (error) {
+      console.error('Error calculating success rate:', error);
+      return '0%';
+    }
+  };
 
   const fetchUserLeads = async (clientId: number) => {
     try {
@@ -101,6 +130,10 @@ const Dashboard = () => {
         console.log('No relevant posts found for this client');
         setLeads([]);
       }
+
+      // Calculate and set success rate
+      const rate = await calculateSuccessRate(clientId);
+      setSuccessRate(rate);
     } catch (error) {
       console.error('Unexpected error:', error);
       toast({
@@ -135,6 +168,14 @@ const Dashboard = () => {
     }
   };
 
+  const handlePostClick = async () => {
+    // Refresh the success rate when a post is clicked
+    if (userData?.id) {
+      const rate = await calculateSuccessRate(userData.id);
+      setSuccessRate(rate);
+    }
+  };
+
   const stats = [
     {
       title: "לידים חדשים השבוע",
@@ -145,7 +186,7 @@ const Dashboard = () => {
     },
     {
       title: "שיעור הצלחה",
-      value: "73%",
+      value: successRate,
       change: "+8%",
       icon: BarChart3,
       color: "from-yellow-200 to-yellow-300 text-yellow-800"
@@ -211,7 +252,7 @@ const Dashboard = () => {
         {leads.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {leads.map((lead) => (
-              <LeadCard key={lead.id} {...lead} />
+              <LeadCard key={lead.id} {...lead} onPostClick={handlePostClick} />
             ))}
           </div>
         ) : (

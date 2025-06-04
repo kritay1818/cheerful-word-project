@@ -11,6 +11,7 @@ export type Database = {
     Tables: {
       Client_post_match: {
         Row: {
+          clicked: boolean | null
           client_id: number | null
           created_at: string
           id: number
@@ -18,6 +19,7 @@ export type Database = {
           post_id: number | null
         }
         Insert: {
+          clicked?: boolean | null
           client_id?: number | null
           created_at?: string
           id?: number
@@ -25,6 +27,7 @@ export type Database = {
           post_id?: number | null
         }
         Update: {
+          clicked?: boolean | null
           client_id?: number | null
           created_at?: string
           id?: number
