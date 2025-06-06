@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
@@ -26,6 +27,23 @@ const Navigation = () => {
           </h1>
         </Link>
 
+        {/* Navigation Links for Front Page */}
+        {location.pathname === '/' && !isLoggedIn && (
+          <div className="hidden md:flex items-center space-x-8">
+            <a href="#features" className="text-slate-700 hover:text-purple-600 font-medium transition-colors">
+              מאפיינים
+            </a>
+            <a href="#how-it-works" className="text-slate-700 hover:text-purple-600 font-medium transition-colors">
+              איך זה עובד
+            </a>
+            <a href="#pricing" className="text-slate-700 hover:text-purple-600 font-medium transition-colors">
+              תמחור
+            </a>
+            <a href="#faq" className="text-slate-700 hover:text-purple-600 font-medium transition-colors">
+              שאלות נפוצות
+            </a>
+          </div>
+        )}
         
         <div className="flex items-center space-x-4">
           {location.pathname !== '/' && (

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -102,7 +103,7 @@ const Index = () => {
       </div>
 
       {/* Features */}
-      <div className="mb-20">
+      <div id="features" className="mb-20">
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           למה לבחור ב-snipost?
         </h2>
@@ -136,7 +137,7 @@ const Index = () => {
       </div>
 
       {/* How it works */}
-      <div className="mb-20">
+      <div id="how-it-works" className="mb-20">
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           איך זה עובד?
         </h2>
@@ -169,7 +170,7 @@ const Index = () => {
       </div>
 
       {/* Pricing Section - moved here */}
-      <div className="mb-20">
+      <div id="pricing" className="mb-20">
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           תמחור פשוט ושקוף
         </h2>
@@ -224,7 +225,7 @@ const Index = () => {
       </div>
 
       {/* FAQ Section */}
-      <div className="mb-20">
+      <div id="faq" className="mb-20">
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           שאלות נפוצות
         </h2>
