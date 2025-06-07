@@ -75,7 +75,7 @@ const Index = () => {
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-16">
         <div className="text-center mb-16">
           <div className="mx-auto mb-8">
-            <img src="/lovable-uploads/248b6086-71d7-4951-9099-120e5eb66c07.png" alt="snipost logo" className="w-40 h-40 mx-auto object-contain" />
+            <img src="/lovable-uploads/248b6086-71d7-4951-9099-120e5eb66c07.png" alt="snipost logo" className="w-64 h-64 mx-auto object-contain" />
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-slate-700 mb-6 leading-tight">
