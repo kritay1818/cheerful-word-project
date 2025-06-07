@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -76,7 +75,7 @@ const Index = () => {
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-16">
         <div className="text-center mb-16">
           <div className="w-24 h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-purple-300 via-blue-300 to-green-300 flex items-center justify-center shadow-[inset_0_4px_20px_rgba(255,255,255,0.3),0_12px_32px_rgba(0,0,0,0.15)]">
-            <img src="/lovable-uploads/048c0e4e-7629-4fdf-ae3a-1d432ec83916.png" alt="snipost logo" className="w-12 h-12 object-contain" />
+            <img src="/lovable-uploads/248b6086-71d7-4951-9099-120e5eb66c07.png" alt="snipost logo" className="w-12 h-12 object-contain" />
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-slate-700 mb-6 leading-tight">
