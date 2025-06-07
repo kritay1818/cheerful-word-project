@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import LeadCard from '@/components/LeadCard';
 import ClayButton from '@/components/ClayButton';
-import { BarChart3, TrendingUp, RefreshCw } from 'lucide-react';
+import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
@@ -235,6 +236,42 @@ const Dashboard = () => {
             <p className="text-lg text-slate-600">
               הנה הלידים החדשים שמצאנו עבור {userData?.Profession || 'העסק שלך'}
             </p>
+          </ClayCard>
+        </div>
+
+        {/* Telegram Connection Section */}
+        <div className="mb-8">
+          <ClayCard className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+            <div className="flex items-start space-x-4 rtl:space-x-reverse">
+              <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
+                <MessageCircle className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-slate-700 mb-2">
+                  קבל לידים גם בטלגרם! 📱
+                </h3>
+                <p className="text-slate-600 mb-4">
+                  כדי לקבל את הלידים גם בטלגרם, שלח הודעה לבוט שלנו עם האימייל שלך
+                </p>
+                <div className="bg-white p-4 rounded-xl border border-blue-200 mb-4">
+                  <p className="text-sm text-slate-600 mb-2">שלח הודעה עם האימייל שלך:</p>
+                  <code className="bg-slate-100 px-3 py-1 rounded text-sm font-mono">
+                    {userData?.email || 'האימייל שלך'}
+                  </code>
+                </div>
+                <a 
+                  href="https://t.me/lead_magnet_facebook_bot" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <ClayButton variant="primary" size="sm">
+                    <ExternalLink className="w-4 h-4 ml-2" />
+                    פתח בוט טלגרם
+                  </ClayButton>
+                </a>
+              </div>
+            </div>
           </ClayCard>
         </div>
 
