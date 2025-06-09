@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import ClayButton from '@/components/ClayButton';
-import { Target, Users, TrendingUp, Zap, BarChart3, ChevronDown, Check, Star } from 'lucide-react';
+import { Target, Users, TrendingUp, Zap, BarChart3, ChevronDown, Check, Star, Mail } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Index = () => {
@@ -246,7 +247,7 @@ const Index = () => {
       </div>
 
       {/* CTA */}
-      <ClayCard variant="elevated" className="text-center">
+      <ClayCard variant="elevated" className="text-center mb-20">
         <h2 className="text-3xl font-bold text-slate-700 mb-4">
           מוכן להתחיל למצוא לידים?
         </h2>
@@ -258,6 +259,24 @@ const Index = () => {
             התחל בחינם היום
           </ClayButton>
         </Link>
+      </ClayCard>
+
+      {/* Contact Section */}
+      <ClayCard className="text-center">
+        <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
+          <Mail className="w-6 h-6 text-blue-800" />
+        </div>
+        <h3 className="text-xl font-semibold text-slate-700 mb-3">צור איתנו קשר</h3>
+        <p className="text-slate-600 mb-4">
+          יש לך בקשות או פידבק? נשמח לשמוע ממך
+        </p>
+        <a 
+          href="mailto:itaykritmaler@gmail.com" 
+          className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors"
+        >
+          <Mail className="w-4 h-4 ml-2" />
+          itaykritmaler@gmail.com
+        </a>
       </ClayCard>
     </div>
   );

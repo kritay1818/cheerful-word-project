@@ -125,7 +125,7 @@ export type Database = {
       }
       Groups: {
         Row: {
-          active: boolean | null
+          active: boolean
           category: string | null
           created_at: string
           id: number
@@ -133,7 +133,7 @@ export type Database = {
           url: string
         }
         Insert: {
-          active?: boolean | null
+          active?: boolean
           category?: string | null
           created_at?: string
           id?: number
@@ -141,7 +141,7 @@ export type Database = {
           url: string
         }
         Update: {
-          active?: boolean | null
+          active?: boolean
           category?: string | null
           created_at?: string
           id?: number
