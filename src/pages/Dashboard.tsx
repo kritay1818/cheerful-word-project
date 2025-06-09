@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import LeadCard from '@/components/LeadCard';
 import ClayButton from '@/components/ClayButton';
 import TelegramConnectionDialog from '@/components/TelegramConnectionDialog';
-import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink } from 'lucide-react';
+import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink, Mail } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
@@ -289,12 +290,30 @@ const Dashboard = () => {
 
         {/* Load More */}
         {leads.length > 0 && (
-          <div className="text-center">
+          <div className="text-center mb-8">
             <ClayButton variant="primary" size="lg">
               טען עוד לידים
             </ClayButton>
           </div>
         )}
+
+        {/* Contact Section */}
+        <ClayCard className="text-center">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
+            <Mail className="w-6 h-6 text-blue-800" />
+          </div>
+          <h3 className="text-xl font-semibold text-slate-700 mb-3">צור איתנו קשר</h3>
+          <p className="text-slate-600 mb-4">
+            יש לך בקשות או פידבק? נשמח לשמוע ממך
+          </p>
+          <a 
+            href="mailto:itaykritmaler@gmail.com" 
+            className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors"
+          >
+            <Mail className="w-4 h-4 ml-2" />
+            itaykritmaler@gmail.com
+          </a>
+        </ClayCard>
       </div>
     </div>
   );
