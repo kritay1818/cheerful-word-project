@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -50,8 +51,10 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
     setIsLoading(true);
     
     try {
@@ -112,119 +115,122 @@ const Register = () => {
         </div>
 
         <ClayCard variant="elevated" className="mb-8">
-          {/* User Information (readonly) */}
-          <div>
-            <h3 className="text-xl font-semibold text-slate-700 mb-6">פרטי המשתמש</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <ClayInput
-                label="שם מלא"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                disabled
-              />
-              <ClayInput
-                label="דוא״ל"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                disabled
-              />
-            </div>
-          </div>
-
-          {/* Business Information */}
-          <div>
-            <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
-              <Building className="w-5 h-5 text-blue-600" />
-              <span>פרטי העסק</span>
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <ClayInput
-                label="סוג העסק"
-                name="businessType"
-                value={formData.businessType}
-                onChange={handleChange}
-                required
-                placeholder="למשל: עורך דין, רואה חשבון, קוסמטיקאית"
-              />
-              <ClayInput
-                label="אזור הפעילות"
-                name="targetArea"
-                value={formData.targetArea}
-                onChange={handleChange}
-                required
-                placeholder="באיזה אזור אתה מחפש לקוחות"
-              />
-            </div>
-            
-            <div className="mt-6">
-              <ClayInput
-                label="תיאור העסק (אופציונלי)"
-                name="businessDescription"
-                value={formData.businessDescription}
-                onChange={handleChange}
-                multiline
-                rows={4}
-                placeholder="ספר על העסק שלך, השירותים שאתה נותן, והיתרונות שלך"
-              />
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* User Information (readonly) */}
+            <div>
+              <h3 className="text-xl font-semibold text-slate-700 mb-6">פרטי המשתמש</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <ClayInput
+                  label="שם מלא"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  disabled
+                />
+                <ClayInput
+                  label="דוא״ל"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  disabled
+                />
+              </div>
             </div>
 
-            <div className="mt-6">
-              <ClayInput
-                label="בקשות ספציפיות ללידים (אופציונלי)"
-                name="specificRequests"
-                value={formData.specificRequests}
-                onChange={handleChange}
-                multiline
-                rows={3}
-                placeholder="האם יש לך בקשות מיוחדות או קריטריונים ספציפיים ללידים?"
-              />
-            </div>
-          </div>
+            {/* Business Information */}
+            <div>
+              <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
+                <Building className="w-5 h-5 text-blue-600" />
+                <span>פרטי העסק</span>
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <ClayInput
+                  label="סוג העסק"
+                  name="businessType"
+                  value={formData.businessType}
+                  onChange={handleChange}
+                  required
+                  placeholder="למשל: עורך דין, רואה חשבון, קוסמטיקאית"
+                />
+                <ClayInput
+                  label="אזור הפעילות"
+                  name="targetArea"
+                  value={formData.targetArea}
+                  onChange={handleChange}
+                  required
+                  placeholder="באיזה אזור אתה מחפש לקוחות"
+                />
+              </div>
+              
+              <div className="mt-6">
+                <ClayInput
+                  label="תיאור העסק (אופציונלי)"
+                  name="businessDescription"
+                  value={formData.businessDescription}
+                  onChange={handleChange}
+                  multiline
+                  rows={4}
+                  placeholder="ספר על העסק שלך, השירותים שאתה נותן, והיתרונות שלך"
+                />
+              </div>
 
-          {/* Target Information */}
-          <div>
-            <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
-              <Target className="w-5 h-5 text-green-600" />
-              <span>יעדים ולקוחות</span>
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <ClayInput
-                label="כמה לידים אתה מקבל היום בחודש"
-                name="currentLeads"
-                type="number"
-                value={formData.currentLeads}
-                onChange={handleChange}
-                required
-                placeholder="מספר הלידים הנוכחי"
-              />
-              <ClayInput
-                label="כמה לידים אתה רוצה לקבל בחודש"
-                name="targetLeads"
-                type="number"
-                value={formData.targetLeads}
-                onChange={handleChange}
-                required
-                placeholder="יעד הלידים החודשי"
-              />
+              <div className="mt-6">
+                <ClayInput
+                  label="בקשות ספציפיות ללידים (אופציונלי)"
+                  name="specificRequests"
+                  value={formData.specificRequests}
+                  onChange={handleChange}
+                  multiline
+                  rows={3}
+                  placeholder="האם יש לך בקשות מיוחדות או קריטריונים ספציפיים ללידים?"
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="pt-6">
-            <ClayButton 
-              type="submit" 
-              variant="primary" 
-              size="lg" 
-              className="w-full text-xl"
-              disabled={isLoading}
-            >
-              {isLoading ? 'שולח...' : 'השלם רישום'}
-            </ClayButton>
-          </div>
+            {/* Target Information */}
+            <div>
+              <h3 className="text-xl font-semibold text-slate-700 mb-6 flex items-center space-x-2">
+                <Target className="w-5 h-5 text-green-600" />
+                <span>יעדים ולקוחות</span>
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <ClayInput
+                  label="כמה לידים אתה מקבל היום בחודש"
+                  name="currentLeads"
+                  type="number"
+                  value={formData.currentLeads}
+                  onChange={handleChange}
+                  required
+                  placeholder="מספר הלידים הנוכחי"
+                />
+                <ClayInput
+                  label="כמה לידים אתה רוצה לקבל בחודש"
+                  name="targetLeads"
+                  type="number"
+                  value={formData.targetLeads}
+                  onChange={handleChange}
+                  required
+                  placeholder="יעד הלידים החודשי"
+                />
+              </div>
+            </div>
+
+            <div className="pt-6">
+              <ClayButton 
+                type="submit" 
+                variant="primary" 
+                size="lg" 
+                className="w-full text-xl"
+                disabled={isLoading}
+                onClick={() => handleSubmit()}
+              >
+                {isLoading ? 'שולח...' : 'השלם רישום'}
+              </ClayButton>
+            </div>
+          </form>
         </ClayCard>
 
         {/* Contact Section */}
