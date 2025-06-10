@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
-import { LogIn, UserPlus, Settings } from 'lucide-react';
+import { LogIn, UserPlus } from 'lucide-react';
 
 const Navigation = () => {
   const location = useLocation();
@@ -45,7 +45,6 @@ const Navigation = () => {
               {location.pathname !== '/filter-request' && (
                 <Link to="/filter-request">
                   <ClayButton variant="secondary" size="sm">
-                    <Settings className="w-4 h-4 ml-2" />
                     אזור אישי
                   </ClayButton>
                 </Link>
