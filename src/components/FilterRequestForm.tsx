@@ -57,7 +57,7 @@ const FilterRequestForm = ({ clientId }: FilterRequestFormProps) => {
       if (response.ok) {
         toast({
           title: "בקשה נשלחה בהצלחה!",
-          description: "בקשת שינוי הסינון נשלחה. נחזור אליך בהקדם",
+          description: "בקשת שינוי הסינון נשלחה",
         });
         setFilterRequest('');
       } else {
