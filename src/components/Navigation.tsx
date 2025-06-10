@@ -46,7 +46,7 @@ const Navigation = () => {
                 <Link to="/filter-request">
                   <ClayButton variant="secondary" size="sm">
                     <Settings className="w-4 h-4 ml-2" />
-                    שינוי סינון
+                    אזור אישי
                   </ClayButton>
                 </Link>
               )}
