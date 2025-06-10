@@ -5,6 +5,8 @@ import ClayCard from '@/components/ClayCard';
 import LeadCard from '@/components/LeadCard';
 import ClayButton from '@/components/ClayButton';
 import TelegramConnectionDialog from '@/components/TelegramConnectionDialog';
+import PersonalArea from '@/components/PersonalArea';
+import FilterRequestForm from '@/components/FilterRequestForm';
 import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink, Mail } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
@@ -247,6 +249,9 @@ const Dashboard = () => {
           </ClayCard>
         </div>
 
+        {/* Personal Area */}
+        <PersonalArea userData={userData} />
+
         {/* Stats Grid - Full width responsive layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {stats.map((stat, index) => (
@@ -259,6 +264,9 @@ const Dashboard = () => {
             </ClayCard>
           ))}
         </div>
+
+        {/* Filter Request Form */}
+        <FilterRequestForm clientId={userData?.id} />
 
         {/* Controls */}
         <div className="flex justify-between items-center mb-8">
