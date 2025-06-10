@@ -41,7 +41,8 @@ const FilterRequestForm = ({ clientId }: FilterRequestFormProps) => {
       const requestData = {
         client_id: clientId,
         filter_request: filterRequest.trim(),
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        email: 'itaykritmaler@gmail.com'
       };
 
       console.log('Sending filter change request:', requestData);
