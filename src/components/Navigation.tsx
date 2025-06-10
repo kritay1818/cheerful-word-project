@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
@@ -43,9 +42,9 @@ const Navigation = () => {
                 </Link>
               )}
               {location.pathname !== '/filter-request' && (
-                <Link to="/filter-request">
-                  <ClayButton variant="secondary" size="sm" className="!p-0">
-                    <span className="px-4 py-2">אזור אישי</span>
+                <Link to="/filter-request" className="block">
+                  <ClayButton variant="secondary" size="sm">
+                    אזור אישי
                   </ClayButton>
                 </Link>
               )}
