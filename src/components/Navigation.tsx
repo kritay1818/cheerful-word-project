@@ -44,8 +44,8 @@ const Navigation = () => {
               )}
               {location.pathname !== '/filter-request' && (
                 <Link to="/filter-request">
-                  <ClayButton variant="secondary" size="sm" className="flex items-center">
-                    אזור אישי
+                  <ClayButton variant="secondary" size="sm" className="!p-0">
+                    <span className="px-4 py-2">אזור אישי</span>
                   </ClayButton>
                 </Link>
               )}
