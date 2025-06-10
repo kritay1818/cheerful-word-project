@@ -1,15 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import LeadCard from '@/components/LeadCard';
 import ClayButton from '@/components/ClayButton';
 import TelegramConnectionDialog from '@/components/TelegramConnectionDialog';
-import PersonalArea from '@/components/PersonalArea';
-import FilterRequestForm from '@/components/FilterRequestForm';
-import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink, Mail } from 'lucide-react';
+import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink, Mail, Settings } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 
 interface Post {
   id: number;
@@ -249,10 +247,7 @@ const Dashboard = () => {
           </ClayCard>
         </div>
 
-        {/* Personal Area */}
-        <PersonalArea userData={userData} />
-
-        {/* Stats Grid - Full width responsive layout */}
+        {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {stats.map((stat, index) => (
             <ClayCard key={index} className="text-center">
@@ -265,8 +260,21 @@ const Dashboard = () => {
           ))}
         </div>
 
-        {/* Filter Request Form */}
-        <FilterRequestForm clientId={userData?.id} />
+        {/* Filter Request Card */}
+        <ClayCard className="mb-8 text-center">
+          <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-orange-200 to-red-300 flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
+            <Settings className="w-6 h-6 text-orange-700" />
+          </div>
+          <h3 className="text-xl font-semibold text-slate-700 mb-3">רוצה לשנות את הסינון?</h3>
+          <p className="text-slate-600 mb-4">
+            כאן תוכל לבקש שינויים בקריטריונים לחיפוש הלידים שלך
+          </p>
+          <Link to="/filter-request">
+            <ClayButton variant="primary">
+              בקש שינוי סינון
+            </ClayButton>
+          </Link>
+        </ClayCard>
 
         {/* Controls */}
         <div className="flex justify-between items-center mb-8">

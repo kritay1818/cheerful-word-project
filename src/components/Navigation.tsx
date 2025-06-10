@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
-import { LogIn, UserPlus } from 'lucide-react';
+import { LogIn, UserPlus, Settings } from 'lucide-react';
 
 const Navigation = () => {
   const location = useLocation();
@@ -39,6 +39,14 @@ const Navigation = () => {
                 <Link to="/dashboard">
                   <ClayButton variant="accent" size="sm">
                     דאשבורד
+                  </ClayButton>
+                </Link>
+              )}
+              {location.pathname !== '/filter-request' && (
+                <Link to="/filter-request">
+                  <ClayButton variant="secondary" size="sm">
+                    <Settings className="w-4 h-4 ml-2" />
+                    שינוי סינון
                   </ClayButton>
                 </Link>
               )}
