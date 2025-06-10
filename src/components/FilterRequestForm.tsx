@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import ClayCard from './ClayCard';
 import ClayInput from './ClayInput';
@@ -47,7 +46,7 @@ const FilterRequestForm = ({ clientId }: FilterRequestFormProps) => {
 
       console.log('Sending filter change request:', requestData);
 
-      const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook-test/ac7fc0cd-5975-402b-9c3c-0f6d38383ee4', {
+      const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/ac7fc0cd-5975-402b-9c3c-0f6d38383ee4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
