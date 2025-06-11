@@ -187,7 +187,7 @@ const Index = () => {
               <h3 className="text-2xl font-bold text-slate-700 mb-4">מנוי חודשי</h3>
               
               <div className="mb-6">
-                <div className="text-5xl font-bold text-purple-600 mb-2">₪100</div>
+                <div className="text-5xl font-bold text-purple-600 mb-2">₪97</div>
                 <div className="text-slate-600">לחודש</div>
               </div>
               
@@ -271,11 +271,11 @@ const Index = () => {
           יש לך בקשות או פידבק? נשמח לשמוע ממך
         </p>
         <a 
-          href="mailto:itaykritmaler@gmail.com" 
+          href="mailto:shaysho111@gmail.com" 
           className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors"
         >
           <Mail className="w-4 h-4 ml-2" />
-          itaykritmaler@gmail.com
+          shaysho111@gmail.com
         </a>
       </ClayCard>
     </div>
