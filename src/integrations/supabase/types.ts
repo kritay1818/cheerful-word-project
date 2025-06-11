@@ -90,6 +90,24 @@ export type Database = {
         }
         Relationships: []
       }
+      Feedback: {
+        Row: {
+          created_at: string
+          id: number
+          text: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          text?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          text?: string | null
+        }
+        Relationships: []
+      }
       Group_Posts: {
         Row: {
           category: string | null

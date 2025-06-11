@@ -7,6 +7,7 @@ import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
 import { toast } from '@/hooks/use-toast';
 import { Clock, CreditCard, MessageSquare, Sparkles } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const TrialExpired = () => {
   const navigate = useNavigate();
@@ -32,32 +33,28 @@ const TrialExpired = () => {
     setIsSubmittingFeedback(true);
     
     try {
-      // Send feedback to the webhook
-      const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/ac7fc0cd-5975-402b-9c3c-0f6d38383ee4', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          type: 'feedback',
-          message: feedback,
-          timestamp: new Date().toISOString(),
-        }),
-      });
+      const { error } = await supabase
+        .from('Feedback')
+        .insert([
+          {
+            text: feedback.trim()
+          }
+        ]);
 
-      if (response.ok) {
-        toast({
-          title: "תודה על המשוב!",
-          description: "המשוב שלך נשלח בהצלחה",
-        });
-        setFeedback('');
-      } else {
-        throw new Error('Failed to send feedback');
+      if (error) {
+        console.error('Error saving feedback:', error);
+        throw error;
       }
-    } catch (error) {
-      console.error('Error sending feedback:', error);
+
       toast({
-        title: "שגיאה בשליחה",
+        title: "תודה על המשוב!",
+        description: "המשוב שלך נשמר בהצלחה",
+      });
+      setFeedback('');
+    } catch (error) {
+      console.error('Error saving feedback:', error);
+      toast({
+        title: "שגיאה בשמירה",
         description: "אנא נסה שוב מאוחר יותר",
         variant: "destructive",
       });
