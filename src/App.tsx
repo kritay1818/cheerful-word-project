@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import FilterRequest from "./pages/FilterRequest";
+import TrialExpired from "./pages/TrialExpired";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/filter-request" element={<FilterRequest />} />
+          <Route path="/trial-expired" element={<TrialExpired />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

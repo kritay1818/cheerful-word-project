@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -80,9 +79,23 @@ const Login = () => {
       const client = clients[0];
       console.log('Found client:', { id: client.id, name: client.name, active: client.active });
 
-      // Check if client is active
+      // Check if client is active - if not, redirect to trial expired page
       if (!client.active) {
-        throw new Error('החשבון שלך אינו פעיל. פנה לתמיכה');
+        // Store client info even for inactive users so they can see their data
+        localStorage.setItem('isLoggedIn', 'false');
+        localStorage.setItem('currentClient', JSON.stringify(client));
+        
+        console.log('Client is inactive, redirecting to trial expired page');
+        
+        toast({
+          title: "תקופת הניסיון הסתיימה",
+          description: "אנא בחר מנוי כדי להמשיך להשתמש בשירות",
+          variant: "destructive",
+        });
+        
+        // Navigate to trial expired page
+        navigate('/trial-expired');
+        return;
       }
 
       // Store client info in localStorage for session management
