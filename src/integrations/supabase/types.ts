@@ -93,18 +93,21 @@ export type Database = {
       Feedback: {
         Row: {
           Cancel: string | null
+          Client_id: string | null
           created_at: string
           id: number
           text: string | null
         }
         Insert: {
           Cancel?: string | null
+          Client_id?: string | null
           created_at?: string
           id?: number
           text?: string | null
         }
         Update: {
           Cancel?: string | null
+          Client_id?: string | null
           created_at?: string
           id?: number
           text?: string | null

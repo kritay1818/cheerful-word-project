@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -14,6 +14,22 @@ const CancelMembership = () => {
   const navigate = useNavigate();
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [clientId, setClientId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getClientData = async () => {
+      try {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (userData.id) {
+          setClientId(userData.id.toString());
+        }
+      } catch (error) {
+        console.error('Error getting client data:', error);
+      }
+    };
+
+    getClientData();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +50,8 @@ const CancelMembership = () => {
         .insert([
           {
             text: reason.trim(),
-            Cancel: 'yes'
+            Cancel: 'yes',
+            Client_id: clientId
           }
         ]);
 
