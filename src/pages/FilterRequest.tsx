@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 const FilterRequest = () => {
   const [userData, setUserData] = useState<any>(null);
+  const [showPersonalArea, setShowPersonalArea] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem('currentClient');
@@ -18,7 +19,10 @@ const FilterRequest = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
-      <Navigation />
+      <Navigation 
+        userSession={userData} 
+        onPersonalAreaClick={() => setShowPersonalArea(true)} 
+      />
       
       <div className="max-w-4xl mx-auto p-6 pt-20">
         <div className="mb-8">
@@ -31,7 +35,12 @@ const FilterRequest = () => {
         </div>
 
         {/* Personal Area */}
-        <PersonalArea userData={userData} />
+        {showPersonalArea && (
+          <PersonalArea 
+            userSession={userData} 
+            onClose={() => setShowPersonalArea(false)} 
+          />
+        )}
 
         {/* Filter Request Form */}
         <FilterRequestForm clientId={userData?.id} />
