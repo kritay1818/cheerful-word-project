@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import ClayCard from '@/components/ClayCard';
 import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
@@ -102,10 +102,10 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50 flex flex-col">
       <Navigation />
       
-      <div className="max-w-4xl mx-auto p-6 pt-12">
+      <div className="flex-1 max-w-4xl mx-auto p-6 pt-12">
         <div className="text-center mb-12">
           <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-300 to-blue-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.3),0_8px_24px_rgba(0,0,0,0.15)]">
             <UserPlus className="w-10 h-10 text-purple-700" />
@@ -251,6 +251,8 @@ const Register = () => {
           </a>
         </ClayCard>
       </div>
+      
+      <Footer />
     </div>
   );
 };

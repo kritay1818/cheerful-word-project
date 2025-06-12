@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import ClayCard from '@/components/ClayCard';
 import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
@@ -64,11 +64,11 @@ const TrialExpired = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50 flex flex-col">
       <Navigation />
       
-      <div className="max-w-4xl mx-auto p-6 pt-20">
-        {/* Header Section */}
+      <div className="flex-1 max-w-4xl mx-auto p-6 pt-20">
+        {/* ... keep existing code (header section) */}
         <div className="text-center mb-12">
           <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-orange-300 to-red-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.3),0_8px_24px_rgba(0,0,0,0.15)]">
             <Clock className="w-10 h-10 text-orange-700" />
@@ -79,6 +79,7 @@ const TrialExpired = () => {
           </p>
         </div>
 
+        {/* ... keep existing code (payment and development sections) */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Payment Section */}
           <ClayCard variant="elevated">
@@ -144,7 +145,7 @@ const TrialExpired = () => {
           </ClayCard>
         </div>
 
-        {/* Feedback Section */}
+        {/* ... keep existing code (feedback section) */}
         <ClayCard variant="default" className="max-w-2xl mx-auto">
           <div className="text-center mb-6">
             <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
@@ -179,6 +180,8 @@ const TrialExpired = () => {
           </form>
         </ClayCard>
       </div>
+      
+      <Footer />
     </div>
   );
 };
