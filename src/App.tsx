@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import FilterRequest from "./pages/FilterRequest";
 import TrialExpired from "./pages/TrialExpired";
+import CancelMembership from "./pages/CancelMembership";
 import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/filter-request" element={<FilterRequest />} />
           <Route path="/trial-expired" element={<TrialExpired />} />
+          <Route path="/cancel-membership" element={<CancelMembership />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

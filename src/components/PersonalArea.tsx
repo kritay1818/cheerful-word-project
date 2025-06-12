@@ -2,7 +2,8 @@
 import React from 'react';
 import ClayCard from './ClayCard';
 import ClayButton from './ClayButton';
-import { User, Settings, Crown } from 'lucide-react';
+import { User, Settings, Crown, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface PersonalAreaProps {
   userData: {
@@ -14,10 +15,16 @@ interface PersonalAreaProps {
 }
 
 const PersonalArea = ({ userData }: PersonalAreaProps) => {
+  const navigate = useNavigate();
+
   if (!userData) return null;
 
   const subscriptionType = userData.Paid ? 'בתשלום' : 'חינמי';
   const isPaidUser = userData.Paid;
+
+  const handleCancelMembership = () => {
+    navigate('/cancel-membership');
+  };
 
   return (
     <ClayCard className="mb-8">
@@ -74,6 +81,25 @@ const PersonalArea = ({ userData }: PersonalAreaProps) => {
                 שדרג עכשיו
               </ClayButton>
             </a>
+          </div>
+        </div>
+      )}
+
+      {isPaidUser && (
+        <div className="mt-6 p-4 rounded-xl bg-gradient-to-br from-red-50 to-pink-50 border border-red-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <h4 className="text-lg font-semibold text-red-800 mb-1">בטל מנוי</h4>
+              <p className="text-sm text-red-700">רוצה לבטל את המנוי שלך? נשמח לשמוע למה</p>
+            </div>
+            <ClayButton 
+              variant="secondary" 
+              onClick={handleCancelMembership}
+              className="bg-gradient-to-br from-red-200 to-red-300 text-red-800 hover:from-red-300 hover:to-red-400"
+            >
+              <X className="w-4 h-4 ml-2" />
+              בטל מנוי
+            </ClayButton>
           </div>
         </div>
       )}
