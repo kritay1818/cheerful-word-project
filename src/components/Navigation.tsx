@@ -1,22 +1,18 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
-import { LogIn, UserPlus, User } from 'lucide-react';
+import { LogIn, UserPlus } from 'lucide-react';
 
-interface NavigationProps {
-  userSession?: any;
-  onPersonalAreaClick?: () => void;
-}
-
-const Navigation = ({ userSession, onPersonalAreaClick }: NavigationProps) => {
+const Navigation = () => {
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem('userSession') || userSession;
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const hasSignupData = localStorage.getItem('tempSignupData');
 
   const handleLogout = () => {
-    localStorage.removeItem('userSession');
-    localStorage.removeItem('userData');
-    localStorage.removeItem('tempSignupData');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentClient');
+    localStorage.removeItem('userData'); // Keep for backward compatibility
+    localStorage.removeItem('tempSignupData'); // Clean up any temporary data
     window.location.href = '/';
   };
 
@@ -45,11 +41,12 @@ const Navigation = ({ userSession, onPersonalAreaClick }: NavigationProps) => {
                   </ClayButton>
                 </Link>
               )}
-              {onPersonalAreaClick && (
-                <ClayButton variant="secondary" size="sm" onClick={onPersonalAreaClick}>
-                  <User className="w-4 h-4 ml-2" />
-                  אזור אישי
-                </ClayButton>
+              {location.pathname !== '/filter-request' && (
+                <Link to="/filter-request" className="block">
+                  <ClayButton variant="secondary" size="sm">
+                    אזור אישי
+                  </ClayButton>
+                </Link>
               )}
               <ClayButton variant="secondary" size="sm" onClick={handleLogout}>
                 התנתק
@@ -57,21 +54,31 @@ const Navigation = ({ userSession, onPersonalAreaClick }: NavigationProps) => {
             </>
           ) : (
             <>
-              {location.pathname !== '/login' && (
-                <Link to="/login">
-                  <ClayButton variant="secondary" size="sm">
-                    <LogIn className="w-4 h-4 ml-2" />
-                    התחבר
-                  </ClayButton>
-                </Link>
-              )}
-              {location.pathname !== '/signup' && (
+              {location.pathname === '/register' && hasSignupData ? (
                 <Link to="/signup">
-                  <ClayButton variant="primary" size="sm">
-                    <UserPlus className="w-4 h-4 ml-2" />
-                    הירשם
+                  <ClayButton variant="secondary" size="sm">
+                    חזור להרשמה
                   </ClayButton>
                 </Link>
+              ) : (
+                <>
+                  {location.pathname !== '/login' && (
+                    <Link to="/login">
+                      <ClayButton variant="secondary" size="sm">
+                        <LogIn className="w-4 h-4 ml-2" />
+                        התחבר
+                      </ClayButton>
+                    </Link>
+                  )}
+                  {location.pathname !== '/signup' && (
+                    <Link to="/signup">
+                      <ClayButton variant="primary" size="sm">
+                        <UserPlus className="w-4 h-4 ml-2" />
+                        הירשם
+                      </ClayButton>
+                    </Link>
+                  )}
+                </>
               )}
             </>
           )}
