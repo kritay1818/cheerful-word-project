@@ -10,6 +10,7 @@ interface ClayButtonProps {
   className?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  asChild?: boolean;
 }
 
 const ClayButton = ({ 
@@ -19,9 +20,10 @@ const ClayButton = ({
   size = 'md', 
   className, 
   type = 'button',
-  disabled = false 
+  disabled = false,
+  asChild = false
 }: ClayButtonProps) => {
-  const baseClasses = "rounded-2xl font-medium transition-all duration-300 border-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+  const baseClasses = "rounded-2xl font-medium transition-all duration-300 border-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center";
   
   const variants = {
     primary: "bg-gradient-to-br from-purple-300 to-purple-400 text-purple-800 shadow-[inset_0_2px_8px_rgba(139,69,19,0.1),0_4px_12px_rgba(139,69,19,0.2)] hover:shadow-[inset_0_2px_8px_rgba(139,69,19,0.15),0_6px_16px_rgba(139,69,19,0.3)] active:shadow-[inset_0_4px_12px_rgba(139,69,19,0.2)]",
@@ -35,12 +37,22 @@ const ClayButton = ({
     lg: "px-8 py-4 text-lg"
   };
 
+  const combinedClassName = cn(baseClasses, variants[variant], sizes[size], className);
+
+  if (asChild) {
+    return React.cloneElement(children as React.ReactElement, {
+      className: combinedClassName,
+      onClick,
+      disabled
+    });
+  }
+
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={cn(baseClasses, variants[variant], sizes[size], className)}
+      className={combinedClassName}
     >
       {children}
     </button>

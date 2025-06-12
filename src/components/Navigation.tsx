@@ -1,18 +1,22 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ClayButton from './ClayButton';
-import { LogIn, UserPlus } from 'lucide-react';
+import { LogIn, UserPlus, User } from 'lucide-react';
 
-const Navigation = () => {
+interface NavigationProps {
+  userSession?: any;
+  onPersonalAreaClick?: () => void;
+}
+
+const Navigation = ({ userSession, onPersonalAreaClick }: NavigationProps) => {
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  const hasSignupData = localStorage.getItem('tempSignupData');
+  const isLoggedIn = localStorage.getItem('userSession') || userSession;
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('currentClient');
-    localStorage.removeItem('userData'); // Keep for backward compatibility
-    localStorage.removeItem('tempSignupData'); // Clean up any temporary data
+    localStorage.removeItem('userSession');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('tempSignupData');
     window.location.href = '/';
   };
 
@@ -41,12 +45,11 @@ const Navigation = () => {
                   </ClayButton>
                 </Link>
               )}
-              {location.pathname !== '/filter-request' && (
-                <Link to="/filter-request" className="block">
-                  <ClayButton variant="secondary" size="sm">
-                    אזור אישי
-                  </ClayButton>
-                </Link>
+              {onPersonalAreaClick && (
+                <ClayButton variant="secondary" size="sm" onClick={onPersonalAreaClick}>
+                  <User className="w-4 h-4 ml-2" />
+                  אזור אישי
+                </ClayButton>
               )}
               <ClayButton variant="secondary" size="sm" onClick={handleLogout}>
                 התנתק
@@ -54,31 +57,21 @@ const Navigation = () => {
             </>
           ) : (
             <>
-              {location.pathname === '/register' && hasSignupData ? (
-                <Link to="/signup">
+              {location.pathname !== '/login' && (
+                <Link to="/login">
                   <ClayButton variant="secondary" size="sm">
-                    חזור להרשמה
+                    <LogIn className="w-4 h-4 ml-2" />
+                    התחבר
                   </ClayButton>
                 </Link>
-              ) : (
-                <>
-                  {location.pathname !== '/login' && (
-                    <Link to="/login">
-                      <ClayButton variant="secondary" size="sm">
-                        <LogIn className="w-4 h-4 ml-2" />
-                        התחבר
-                      </ClayButton>
-                    </Link>
-                  )}
-                  {location.pathname !== '/signup' && (
-                    <Link to="/signup">
-                      <ClayButton variant="primary" size="sm">
-                        <UserPlus className="w-4 h-4 ml-2" />
-                        הירשם
-                      </ClayButton>
-                    </Link>
-                  )}
-                </>
+              )}
+              {location.pathname !== '/signup' && (
+                <Link to="/signup">
+                  <ClayButton variant="primary" size="sm">
+                    <UserPlus className="w-4 h-4 ml-2" />
+                    הירשם
+                  </ClayButton>
+                </Link>
               )}
             </>
           )}
