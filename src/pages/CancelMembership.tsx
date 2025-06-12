@@ -19,28 +19,52 @@ const CancelMembership = () => {
   useEffect(() => {
     const getClientData = async () => {
       try {
+        console.log('=== Debug: Starting client ID detection ===');
+        
+        // Debug: Check all localStorage keys
+        console.log('All localStorage keys:', Object.keys(localStorage));
+        
         // Try multiple sources for client ID
         let userData = null;
         
         // First try userData from localStorage
         const userDataStr = localStorage.getItem('userData');
+        console.log('userData from localStorage:', userDataStr);
         if (userDataStr) {
           userData = JSON.parse(userDataStr);
+          console.log('Parsed userData:', userData);
         }
         
         // If no userData or no ID, try clientData
         if (!userData?.id) {
           const clientDataStr = localStorage.getItem('clientData');
+          console.log('clientData from localStorage:', clientDataStr);
           if (clientDataStr) {
             const clientData = JSON.parse(clientDataStr);
             userData = clientData;
+            console.log('Using clientData:', userData);
+          }
+        }
+        
+        // Try currentClient as well
+        if (!userData?.id) {
+          const currentClientStr = localStorage.getItem('currentClient');
+          console.log('currentClient from localStorage:', currentClientStr);
+          if (currentClientStr) {
+            const currentClient = JSON.parse(currentClientStr);
+            userData = currentClient;
+            console.log('Using currentClient:', userData);
           }
         }
         
         // If still no data, try to get from Supabase session
         if (!userData?.id) {
+          console.log('No client ID found in localStorage, checking Supabase session...');
           const { data: { session } } = await supabase.auth.getSession();
+          console.log('Supabase session:', session);
+          
           if (session?.user?.email) {
+            console.log('Found user email in session:', session.user.email);
             // Query the Clients table to find the user by email
             const { data: clientData, error } = await supabase
               .from('Clients')
@@ -48,17 +72,20 @@ const CancelMembership = () => {
               .eq('email', session.user.email)
               .single();
             
+            console.log('Supabase query result:', { clientData, error });
+            
             if (clientData && !error) {
               userData = { id: clientData.id };
+              console.log('Found client ID from database:', clientData.id);
             }
           }
         }
         
         if (userData?.id) {
           setClientId(userData.id.toString());
-          console.log('Client ID found:', userData.id);
+          console.log('=== Final client ID set:', userData.id);
         } else {
-          console.error('No client ID found in any storage or session');
+          console.error('=== No client ID found in any storage or session ===');
         }
       } catch (error) {
         console.error('Error getting client data:', error);
@@ -80,6 +107,7 @@ const CancelMembership = () => {
     }
 
     if (!clientId) {
+      console.error('No client ID available for submission');
       toast({
         title: "שגיאה",
         description: "לא נמצא מזהה משתמש. אנא התחבר מחדש ונסה שוב",
