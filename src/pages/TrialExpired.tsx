@@ -15,8 +15,8 @@ const TrialExpired = () => {
   const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
 
   const handlePayment = () => {
-    // Navigate to signup page where payment is handled
-    navigate('/signup');
+    // Open the payment link in a new tab
+    window.open('https://pay.grow.link/6f15a778cd2a672f4a8b385d6ddb5b7a-MjE0Nzg0OQ', '_blank');
   };
 
   const handleFeedbackSubmit = async (e: React.FormEvent) => {
@@ -68,7 +68,6 @@ const TrialExpired = () => {
       <Navigation />
       
       <div className="flex-1 max-w-4xl mx-auto p-6 pt-20">
-        {/* ... keep existing code (header section) */}
         <div className="text-center mb-12">
           <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-orange-300 to-red-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.3),0_8px_24px_rgba(0,0,0,0.15)]">
             <Clock className="w-10 h-10 text-orange-700" />
@@ -79,7 +78,6 @@ const TrialExpired = () => {
           </p>
         </div>
 
-        {/* ... keep existing code (payment and development sections) */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Payment Section */}
           <ClayCard variant="elevated">
@@ -145,7 +143,6 @@ const TrialExpired = () => {
           </ClayCard>
         </div>
 
-        {/* ... keep existing code (feedback section) */}
         <ClayCard variant="default" className="max-w-2xl mx-auto">
           <div className="text-center mb-6">
             <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center">
