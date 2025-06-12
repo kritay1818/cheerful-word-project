@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
@@ -323,11 +324,11 @@ const Dashboard = () => {
             יש לך בקשות או פידבק? נשמח לשמוע ממך
           </p>
           <a 
-            href="mailto:itaykritmaler@gmail.com" 
+            href="mailto:shaysho111@gmail.com" 
             className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors"
           >
             <Mail className="w-4 h-4 ml-2" />
-            itaykritmaler@gmail.com
+            shaysho111@gmail.com
           </a>
         </ClayCard>
       </div>
