@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -14,6 +15,7 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
+    emailUpdates: false,
     businessType: '',
     targetArea: '',
     currentLeads: '',
@@ -40,7 +42,8 @@ const Register = () => {
       ...prev,
       name: signupData.name,
       email: signupData.email,
-      password: signupData.password
+      password: signupData.password,
+      emailUpdates: signupData.emailUpdates || false
     }));
   }, [navigate]);
 
@@ -60,7 +63,7 @@ const Register = () => {
     try {
       console.log('Sending complete registration data:', formData);
       
-      // Send complete data to N8N webhook including name, email, password
+      // Send complete data to N8N webhook including name, email, password, and emailUpdates
       const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/Register', {
         method: 'POST',
         headers: {
@@ -138,6 +141,11 @@ const Register = () => {
                   disabled
                 />
               </div>
+              {formData.emailUpdates && (
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <p className="text-sm text-blue-700">✓ נרשמת לקבלת עדכונים במייל</p>
+                </div>
+              )}
             </div>
 
             {/* Business Information */}

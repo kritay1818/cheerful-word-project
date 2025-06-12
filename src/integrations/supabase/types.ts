@@ -55,6 +55,7 @@ export type Database = {
         Row: {
           active: boolean | null
           email: string | null
+          email_updates: boolean | null
           filter_request: string | null
           id: number
           joined_at: string
@@ -67,6 +68,7 @@ export type Database = {
         Insert: {
           active?: boolean | null
           email?: string | null
+          email_updates?: boolean | null
           filter_request?: string | null
           id?: number
           joined_at?: string
@@ -79,6 +81,7 @@ export type Database = {
         Update: {
           active?: boolean | null
           email?: string | null
+          email_updates?: boolean | null
           filter_request?: string | null
           id?: number
           joined_at?: string

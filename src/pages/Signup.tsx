@@ -19,6 +19,7 @@ const Signup = () => {
     confirmPassword: ''
   });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [emailUpdates, setEmailUpdates] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -63,6 +64,7 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         password: formData.password,
+        emailUpdates: emailUpdates,
         createdAt: new Date().toISOString()
       };
       
@@ -141,6 +143,18 @@ const Signup = () => {
               required
               placeholder="הזן שוב את הסיסמה"
             />
+
+            <div className="flex items-start space-x-3 space-x-reverse">
+              <Checkbox
+                id="emailUpdates"
+                checked={emailUpdates}
+                onCheckedChange={(checked) => setEmailUpdates(checked as boolean)}
+                className="mt-1"
+              />
+              <label htmlFor="emailUpdates" className="text-sm text-slate-600 leading-relaxed">
+                אני מעוניין/ת לקבל עדכונים במייל על לידים חדשים ועדכונים במערכת
+              </label>
+            </div>
 
             <div className="flex items-start space-x-3 space-x-reverse">
               <Checkbox
