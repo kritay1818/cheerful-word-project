@@ -19,9 +19,46 @@ const CancelMembership = () => {
   useEffect(() => {
     const getClientData = async () => {
       try {
-        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-        if (userData.id) {
+        // Try multiple sources for client ID
+        let userData = null;
+        
+        // First try userData from localStorage
+        const userDataStr = localStorage.getItem('userData');
+        if (userDataStr) {
+          userData = JSON.parse(userDataStr);
+        }
+        
+        // If no userData or no ID, try clientData
+        if (!userData?.id) {
+          const clientDataStr = localStorage.getItem('clientData');
+          if (clientDataStr) {
+            const clientData = JSON.parse(clientDataStr);
+            userData = clientData;
+          }
+        }
+        
+        // If still no data, try to get from Supabase session
+        if (!userData?.id) {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session?.user?.email) {
+            // Query the Clients table to find the user by email
+            const { data: clientData, error } = await supabase
+              .from('Clients')
+              .select('id')
+              .eq('email', session.user.email)
+              .single();
+            
+            if (clientData && !error) {
+              userData = { id: clientData.id };
+            }
+          }
+        }
+        
+        if (userData?.id) {
           setClientId(userData.id.toString());
+          console.log('Client ID found:', userData.id);
+        } else {
+          console.error('No client ID found in any storage or session');
         }
       } catch (error) {
         console.error('Error getting client data:', error);
@@ -42,9 +79,20 @@ const CancelMembership = () => {
       return;
     }
 
+    if (!clientId) {
+      toast({
+        title: "שגיאה",
+        description: "לא נמצא מזהה משתמש. אנא התחבר מחדש ונסה שוב",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
+      console.log('Submitting feedback with client ID:', clientId);
+      
       const { error } = await supabase
         .from('Feedback')
         .insert([
