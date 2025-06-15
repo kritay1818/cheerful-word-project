@@ -136,8 +136,110 @@ const Index = () => {
         ))}
       </div>
 
-      {/* How it works */}
-      <div className="mb-20">
+      {/* User Guide Section */}
+      <div className="mb-20 relative py-16">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-blue-100/50 to-green-100/50 rounded-3xl -z-10"></div>
+        <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
+          המסלול שלך להצלחה
+        </h2>
+        
+        <div className="max-w-6xl mx-auto px-6 space-y-12">
+          {/* Step 1 */}
+          <div className="relative">
+            <div className="absolute right-[50%] top-0 bottom-0 w-1 bg-gradient-to-b from-purple-200 to-blue-200 hidden md:block"></div>
+            <ClayCard variant="elevated" className="md:w-[48%] transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -right-8 w-16 h-16 rounded-full bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center text-2xl font-bold text-purple-700 shadow-lg hidden md:flex">1</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Users className="w-8 h-8 text-purple-700" />
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">הרשמה ראשונית</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 020004.png" alt="תהליך ההרשמה" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">מלא את הפרטים הבסיסיים שלך - שם מלא, אימייל וסיסמה. זה השלב הראשון בדרך להצלחה שלך.</p>
+              </div>
+            </ClayCard>
+          </div>
+
+          {/* Step 2 */}
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] md:mr-auto transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -left-8 w-16 h-16 rounded-full bg-gradient-to-br from-blue-200 to-green-200 flex items-center justify-center text-2xl font-bold text-blue-700 shadow-lg hidden md:flex">2</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-blue-200 to-green-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Target className="w-8 h-8 text-blue-700" />
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">הגדרת פרטי העסק</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 020049.png" alt="הגדרת העסק" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">הגדר את תחום העיסוק, אזור הפעילות, ומילות המפתח שיעזרו לנו למצוא את הלידים המתאימים ביותר עבורך.</p>
+              </div>
+            </ClayCard>
+          </div>
+
+          {/* Step 3 */}
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -right-8 w-16 h-16 rounded-full bg-gradient-to-br from-green-200 to-teal-200 flex items-center justify-center text-2xl font-bold text-green-700 shadow-lg hidden md:flex">3</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-teal-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <BarChart3 className="w-8 h-8 text-green-700" />
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">כניסה לדאשבורד</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 011121.png" alt="הדאשבורד" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
+              </div>
+            </ClayCard>
+          </div>
+
+          {/* Step 4 */}
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] md:mr-auto transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -left-8 w-16 h-16 rounded-full bg-gradient-to-br from-teal-200 to-purple-200 flex items-center justify-center text-2xl font-bold text-teal-700 shadow-lg hidden md:flex">4</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-teal-200 to-purple-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Zap className="w-8 h-8 text-teal-700" />
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">מעקב אחרי התראות</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 011206.png" alt="חיבור לטלגרם" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!</p>
+              </div>
+            </ClayCard>
+          </div>
+
+          {/* Step 5 */}
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -right-8 w-16 h-16 rounded-full bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-2xl font-bold text-purple-700 shadow-lg hidden md:flex">5</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Mail className="w-8 h-8 text-purple-700" />
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">ודבר אחרון כדי שהAI יזהה אותך</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 011228.png" alt="שליחת הודעה לבוט AI" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">שלח הודעה לבוט עם המייל שלך</p>
+              </div>
+            </ClayCard>
+          </div>
+        </div>
+      </div>
+
+      {/* How it works section */}
+      <div className="mb-20 relative py-16">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-blue-100/50 to-green-100/50 rounded-3xl -z-10"></div>
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           איך זה עובד?
         </h2>
@@ -261,8 +363,12 @@ const Index = () => {
         </Link>
       </ClayCard>
 
+      {/* User Guide Section */}
+      
+
       {/* Contact Section */}
-      <ClayCard className="text-center">
+      
+<ClayCard className="text-center">
         <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
           <Mail className="w-6 h-6 text-blue-800" />
         </div>
