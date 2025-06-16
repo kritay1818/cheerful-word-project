@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -142,10 +143,10 @@ const Index = () => {
           המסלול שלך להצלחה
         </h2>
         
-        <div className="max-w-4xl mx-auto px-6 space-y-16">
+        <div className="max-w-6xl mx-auto px-6 space-y-16">
           {/* Step 1 */}
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/2">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="order-2 md:order-1">
               <ClayCard variant="elevated" className="relative">
                 <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">1</div>
                 <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
@@ -155,20 +156,20 @@ const Index = () => {
                 <p className="text-slate-600 leading-relaxed text-center">מלא את הפרטים הבסיסיים שלך - שם מלא, אימייל וסיסמה. זה השלב הראשון בדרך להצלחה שלך.</p>
               </ClayCard>
             </div>
-            <div className="md:w-1/2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
+            <div className="order-1 md:order-2">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 020004.png" 
                   alt="תהליך ההרשמה" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
           </div>
 
           {/* Step 2 */}
-          <div className="flex flex-col md:flex-row-reverse items-center gap-8">
-            <div className="md:w-1/2">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="order-2">
               <ClayCard variant="elevated" className="relative">
                 <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">2</div>
                 <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-blue-200 to-green-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
@@ -178,20 +179,20 @@ const Index = () => {
                 <p className="text-slate-600 leading-relaxed text-center">הגדר את תחום העיסוק, אזור הפעילות, ומילות המפתח שיעזרו לנו למצוא את הלידים המתאימים ביותר עבורך.</p>
               </ClayCard>
             </div>
-            <div className="md:w-1/2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
+            <div className="order-1">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 020049.png" 
                   alt="הגדרת העסק" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
           </div>
 
           {/* Step 3 */}
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/2">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="order-2 md:order-1">
               <ClayCard variant="elevated" className="relative">
                 <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">3</div>
                 <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-teal-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
@@ -201,20 +202,20 @@ const Index = () => {
                 <p className="text-slate-600 leading-relaxed text-center">צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
               </ClayCard>
             </div>
-            <div className="md:w-1/2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
+            <div className="order-1 md:order-2">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 011121.png" 
                   alt="הדאשבורד" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
           </div>
 
           {/* Step 4 */}
-          <div className="flex flex-col md:flex-row-reverse items-center gap-8">
-            <div className="md:w-1/2">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="order-2">
               <ClayCard variant="elevated" className="relative">
                 <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-purple-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">4</div>
                 <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-teal-200 to-purple-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
@@ -224,20 +225,20 @@ const Index = () => {
                 <p className="text-slate-600 leading-relaxed text-center">התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!</p>
               </ClayCard>
             </div>
-            <div className="md:w-1/2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
+            <div className="order-1">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 011206.png" 
                   alt="חיבור לטלגרם" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
           </div>
 
           {/* Step 5 */}
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/2">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="order-2 md:order-1">
               <ClayCard variant="elevated" className="relative">
                 <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">5</div>
                 <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
@@ -247,12 +248,12 @@ const Index = () => {
                 <p className="text-slate-600 leading-relaxed text-center">שלח הודעה לבוט עם המייל שלך כדי שהמערכת תוכל לזהות אותך ולהתחיל לשלוח לך לידים.</p>
               </ClayCard>
             </div>
-            <div className="md:w-1/2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
+            <div className="order-1 md:order-2">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 011228.png" 
                   alt="שליחת הודעה לבוט AI" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
