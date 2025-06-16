@@ -159,7 +159,7 @@ const Index = () => {
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/screenshot1" 
+                  src="/lovable-uploads/33c4ca29-bf23-4970-9c54-4d8e37a5499c.png" 
                   alt="תהליך ההרשמה" 
                   className="w-full h-auto object-contain"
                 />
@@ -182,7 +182,7 @@ const Index = () => {
             <div className="order-1">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/screenshot2" 
+                  src="/lovable-uploads/6186636b-7333-46a0-818e-b0c3c1ddbebd.png" 
                   alt="הגדרת העסק" 
                   className="w-full h-auto object-contain"
                 />
@@ -205,7 +205,7 @@ const Index = () => {
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/screenshot3" 
+                  src="/lovable-uploads/2f78ee92-04bc-44c9-9a45-d04f64de4823.png" 
                   alt="הדאשבורד" 
                   className="w-full h-auto object-contain"
                 />
@@ -228,7 +228,7 @@ const Index = () => {
             <div className="order-1">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/screenshot4" 
+                  src="/lovable-uploads/c8323dd2-6042-4519-bd6b-7209485a001b.png" 
                   alt="חיבור לטלגרם" 
                   className="w-full h-auto object-contain"
                 />
@@ -251,7 +251,7 @@ const Index = () => {
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/screenshot6" 
+                  src="/lovable-uploads/b2fe20d6-f92c-48ca-9c38-b933d0a8de05.png" 
                   alt="שליחת הודעה לבוט AI" 
                   className="w-full h-auto object-contain"
                 />
