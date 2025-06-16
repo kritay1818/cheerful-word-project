@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -228,7 +227,7 @@ const Index = () => {
             <div className="order-1">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/434c85e9-eba7-4daf-a24e-cb5292bed906.png" 
+                  src="/lovable-uploads/57da67ee-7773-4f9f-9cbc-549a91f14d5e.png" 
                   alt="חיבור לטלגרם" 
                   className="w-full h-auto object-contain"
                 />
