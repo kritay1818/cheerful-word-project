@@ -136,7 +136,7 @@ const Index = () => {
         ))}
       </div>
 
-      {/* User Guide Section - Fixed */}
+      {/* User Guide Section - Updated with correct image paths */}
       <div className="mb-20 relative py-16">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-blue-100/50 to-green-100/50 rounded-3xl -z-10"></div>
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
@@ -159,7 +159,7 @@ const Index = () => {
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/step1-registration.png" 
+                  src="/lovable-uploads/8e351dfc-7329-407c-bf8a-d0f2a2e20f26.png" 
                   alt="תהליך ההרשמה" 
                   className="w-full h-auto object-contain"
                 />
@@ -182,7 +182,7 @@ const Index = () => {
             <div className="order-1">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/step2-business-setup.png" 
+                  src="/lovable-uploads/4546c6a8-3d2b-4089-8729-ac349be5bf35.png" 
                   alt="הגדרת העסק" 
                   className="w-full h-auto object-contain"
                 />
@@ -205,7 +205,7 @@ const Index = () => {
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/step3-dashboard.png" 
+                  src="/lovable-uploads/e6f6c90b-a1d6-4b6d-8a2c-289316998ed7.png" 
                   alt="הדאשבורד" 
                   className="w-full h-auto object-contain"
                 />
@@ -228,7 +228,7 @@ const Index = () => {
             <div className="order-1">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/step4-telegram.png" 
+                  src="/lovable-uploads/434c85e9-eba7-4daf-a24e-cb5292bed906.png" 
                   alt="חיבור לטלגרם" 
                   className="w-full h-auto object-contain"
                 />
@@ -251,7 +251,7 @@ const Index = () => {
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/step5-bot-message.png" 
+                  src="/lovable-uploads/3a82d45a-6e1a-4da4-8212-b10cc9a8fd15.png" 
                   alt="שליחת הודעה לבוט AI" 
                   className="w-full h-auto object-contain"
                 />
