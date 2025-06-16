@@ -199,13 +199,13 @@ const Index = () => {
                   <BarChart3 className="w-8 h-8 text-green-700" />
                 </div>
                 <h3 className="text-2xl font-semibold text-slate-700 mb-4 text-center">כניסה לדאשבורד</h3>
-                <p className="text-slate-600 leading-relaxed text-center">צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
+                <p className="text-slate-600 leading-relaxed text-center">צפה בדאשבורד המתקدם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
               </ClayCard>
             </div>
             <div className="order-1 md:order-2">
               <div className="rounded-xl overflow-hidden shadow-xl">
                 <img 
-                  src="/lovable-uploads/e6f6c90b-a1d6-4b6d-8a2c-289316998ed7.png" 
+                  src="/lovable-uploads/a3a4d39b-3f64-4972-a543-b99dbdf1f93c.png" 
                   alt="הדאשבורד" 
                   className="w-full h-auto object-contain"
                 />
