@@ -157,11 +157,11 @@ const Index = () => {
               </ClayCard>
             </div>
             <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white p-4">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 020004.png" 
                   alt="תהליך ההרשמה" 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
               </div>
             </div>
@@ -180,11 +180,11 @@ const Index = () => {
               </ClayCard>
             </div>
             <div className="order-1">
-              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white p-4">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 020049.png" 
                   alt="הגדרת העסק" 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
               </div>
             </div>
@@ -203,11 +203,11 @@ const Index = () => {
               </ClayCard>
             </div>
             <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white p-4">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 011121.png" 
                   alt="הדאשבורד" 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
               </div>
             </div>
@@ -226,11 +226,11 @@ const Index = () => {
               </ClayCard>
             </div>
             <div className="order-1">
-              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white p-4">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 011206.png" 
                   alt="חיבור לטלגרם" 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
               </div>
             </div>
@@ -249,11 +249,11 @@ const Index = () => {
               </ClayCard>
             </div>
             <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-xl bg-white">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-white p-4">
                 <img 
                   src="/lovable-uploads/Screenshot 2025-06-16 011228.png" 
                   alt="שליחת הודעה לבוט AI" 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
               </div>
             </div>
