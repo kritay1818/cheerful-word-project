@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -241,13 +242,13 @@ const Index = () => {
               {/* Image */}
               <div className={index % 2 === 1 ? 'md:col-start-1' : ''}>
                 <div className="group">
-                  <div className="relative overflow-hidden rounded-xl transform transition-all duration-300 group-hover:shadow-xl">
+                  <div className="relative overflow-hidden rounded-xl transform transition-all duration-300 group-hover:shadow-xl bg-white p-4 shadow-lg">
                     <img 
                       src={step.image} 
                       alt={step.title} 
-                      className="w-full transition-transform duration-300 group-hover:scale-105" 
+                      className="w-full rounded-lg transition-transform duration-300 group-hover:scale-105" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                   </div>
                 </div>
               </div>
