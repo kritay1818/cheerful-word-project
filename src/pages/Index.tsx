@@ -70,7 +70,7 @@ const Index = () => {
       icon: BarChart3,
       color: "from-green-200 to-teal-200",
       textColor: "text-green-700",
-      image: "/lovable-uploads/163b05ae-7ae1-4919-a79d-e9a47f9c3a77.png",
+      image: "/lovable-uploads/73948188-63fa-4b02-913d-41f95a8692eb.png",
       description: "צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך."
     },
     {
@@ -79,7 +79,7 @@ const Index = () => {
       icon: Zap,
       color: "from-teal-200 to-purple-200",
       textColor: "text-teal-700",
-      image: "/lovable-uploads/aeef2611-ddd2-4560-a33b-73c74431f663.png",
+      image: "/lovable-uploads/163b05ae-7ae1-4919-a79d-e9a47f9c3a77.png",
       description: "התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!"
     },
     {
@@ -88,7 +88,7 @@ const Index = () => {
       icon: Mail,
       color: "from-purple-200 to-pink-200",
       textColor: "text-purple-700",
-      image: "/lovable-uploads/73948188-63fa-4b02-913d-41f95a8692eb.png",
+      image: "/lovable-uploads/aeef2611-ddd2-4560-a33b-73c74431f663.png",
       description: "שלח הודעה לבוט עם המייל שלך"
     }
   ];
