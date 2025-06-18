@@ -52,7 +52,7 @@ const Index = () => {
       icon: Users,
       color: "from-purple-200 to-blue-200",
       textColor: "text-purple-700",
-      image: "/lovable-uploads/8e351dfc-7329-407c-bf8a-d0f2a2e20f26.png",
+      image: "/lovable-uploads/ec5af2eb-fd03-4214-aad5-2b56388748f4.png",
       description: "מלא את הפרטים הבסיסיים שלך - שם מלא, אימייל וסיסמה. זה השלב הראשון בדרך להצלחה שלך."
     },
     {
@@ -61,7 +61,7 @@ const Index = () => {
       icon: Target,
       color: "from-blue-200 to-green-200",
       textColor: "text-blue-700",
-      image: "/lovable-uploads/4546c6a8-3d2b-4089-8729-ac349be5bf35.png",
+      image: "/lovable-uploads/dfb1f958-be77-4418-a144-227b07460f07.png",
       description: "הגדר את תחום העיסוק, אזור הפעילות, ומילות המפתח שיעזרו לנו למצוא את הלידים המתאימים ביותר עבורך."
     },
     {
@@ -70,7 +70,7 @@ const Index = () => {
       icon: BarChart3,
       color: "from-green-200 to-teal-200",
       textColor: "text-green-700",
-      image: "/lovable-uploads/e6f6c90b-a1d6-4b6d-8a2c-289316998ed7.png",
+      image: "/lovable-uploads/163b05ae-7ae1-4919-a79d-e9a47f9c3a77.png",
       description: "צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך."
     },
     {
@@ -79,7 +79,7 @@ const Index = () => {
       icon: Zap,
       color: "from-teal-200 to-purple-200",
       textColor: "text-teal-700",
-      image: "/lovable-uploads/434c85e9-eba7-4daf-a24e-cb5292bed906.png",
+      image: "/lovable-uploads/aeef2611-ddd2-4560-a33b-73c74431f663.png",
       description: "התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!"
     },
     {
@@ -88,7 +88,7 @@ const Index = () => {
       icon: Mail,
       color: "from-purple-200 to-pink-200",
       textColor: "text-purple-700",
-      image: "/lovable-uploads/3a82d45a-6e1a-4da4-8212-b10cc9a8fd15.png",
+      image: "/lovable-uploads/73948188-63fa-4b02-913d-41f95a8692eb.png",
       description: "שלח הודעה לבוט עם המייל שלך"
     }
   ];
@@ -218,10 +218,10 @@ const Index = () => {
           המסלול שלך להצלחה
         </h2>
         
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Steps Menu */}
-            <div className="space-y-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex gap-8">
+            {/* Steps List */}
+            <div className="w-1/2 space-y-4">
               {steps.map((step) => (
                 <ClayCard 
                   key={step.id}
@@ -232,13 +232,10 @@ const Index = () => {
                   onClick={() => setSelectedStep(step.id)}
                 >
                   <div className="flex items-center p-6">
-                    <div className={`w-16 h-16 ml-6 rounded-3xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]`}>
-                      <step.icon className={`w-8 h-8 ${step.textColor}`} />
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-xl font-bold ${step.textColor} shadow-lg ml-4`}>
+                      {step.id}
                     </div>
                     <div className="flex-1">
-                      <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-xl font-bold ${step.textColor} shadow-lg mb-2`}>
-                        {step.id}
-                      </div>
                       <h3 className="text-xl font-semibold text-slate-700">{step.title}</h3>
                     </div>
                   </div>
@@ -247,8 +244,8 @@ const Index = () => {
             </div>
 
             {/* Explanation Window */}
-            <div className="sticky top-32">
-              <ClayCard variant="elevated" className="p-8">
+            <div className="w-1/2">
+              <ClayCard variant="elevated" className="p-8 sticky top-32">
                 {steps.find(step => step.id === selectedStep) && (
                   <div>
                     <div className={`w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br ${steps.find(step => step.id === selectedStep)?.color} flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]`}>
@@ -405,9 +402,6 @@ const Index = () => {
           </ClayButton>
         </Link>
       </ClayCard>
-
-      {/* User Guide Section */}
-      
 
       {/* Contact Section */}
       
