@@ -84,8 +84,13 @@ const LeadCard = ({ id, title, description, location, date, engagement, facebook
       console.error('Error tracking click:', error);
     }
     
-    // Open the Facebook post in a new window
-    window.open(facebookUrl, '_blank');
+    // Use window.location for better mobile compatibility
+    try {
+      window.location.href = facebookUrl;
+    } catch (error) {
+      // Fallback to window.open if location.href fails
+      window.open(facebookUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
