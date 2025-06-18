@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -219,61 +218,41 @@ const Index = () => {
           המסלול שלך להצלחה
         </h2>
         
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Steps List - Left Side */}
-            <div className="space-y-3">
-              {steps.map((step) => (
-                <div
-                  key={step.id}
-                  className={`p-4 rounded-xl cursor-pointer transition-all duration-300 border-2 ${
-                    selectedStep === step.id 
-                      ? 'border-purple-300 bg-purple-50' 
-                      : 'border-gray-200 bg-white hover:border-purple-200 hover:bg-purple-25'
-                  }`}
-                  onClick={() => setSelectedStep(step.id)}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-lg font-bold ${step.textColor} shadow-md`}>
-                      {step.id}
-                    </div>
-                    <h3 className="text-lg font-semibold text-slate-700">{step.title}</h3>
+        <div className="max-w-7xl mx-auto px-6 space-y-16">
+          {steps.map((step, index) => (
+            <div key={step.id} className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}>
+              {/* Content */}
+              <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
+                <ClayCard variant="elevated" className="p-8">
+                  <div className={`w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]`}>
+                    {React.createElement(step.icon, {
+                      className: `w-8 h-8 ${step.textColor}`
+                    })}
+                  </div>
+                  <h3 className="text-2xl font-semibold text-slate-700 mb-6 text-center">
+                    {step.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed text-center">
+                    {step.description}
+                  </p>
+                </ClayCard>
+              </div>
+
+              {/* Image */}
+              <div className={index % 2 === 1 ? 'md:col-start-1' : ''}>
+                <div className="group">
+                  <div className="relative overflow-hidden rounded-xl transform transition-all duration-300 group-hover:shadow-xl">
+                    <img 
+                      src={step.image} 
+                      alt={step.title} 
+                      className="w-full transition-transform duration-300 group-hover:scale-105" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-
-            {/* Explanation Window - Right Side */}
-            <div>
-              <ClayCard variant="elevated" className="p-8 sticky top-32">
-                {steps.find(step => step.id === selectedStep) && (
-                  <div>
-                    <div className={`w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br ${steps.find(step => step.id === selectedStep)?.color} flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]`}>
-                      {React.createElement(steps.find(step => step.id === selectedStep)?.icon || Users, {
-                        className: `w-8 h-8 ${steps.find(step => step.id === selectedStep)?.textColor}`
-                      })}
-                    </div>
-                    <h3 className="text-2xl font-semibold text-slate-700 mb-6 text-center">
-                      {steps.find(step => step.id === selectedStep)?.title}
-                    </h3>
-                    <div className="group mb-6">
-                      <div className="relative overflow-hidden rounded-xl transform transition-all duration-300 group-hover:shadow-xl">
-                        <img 
-                          src={steps.find(step => step.id === selectedStep)?.image} 
-                          alt={steps.find(step => step.id === selectedStep)?.title} 
-                          className="w-full transition-transform duration-300 group-hover:scale-105" 
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                    </div>
-                    <p className="text-slate-600 leading-relaxed text-center">
-                      {steps.find(step => step.id === selectedStep)?.description}
-                    </p>
-                  </div>
-                )}
-              </ClayCard>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
