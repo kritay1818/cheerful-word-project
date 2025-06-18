@@ -181,7 +181,7 @@ const Index = () => {
               <h3 className="text-2xl font-semibold text-slate-700 mb-6">הרשמה ראשונית</h3>
               <div className="group">
                 <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
-                  <img src="/lovable-uploads/Screenshot 2025-06-16 020004.png" alt="תהליך ההרשמה" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/lovable-uploads/ec5af2eb-fd03-4214-aad5-2b56388748f4.png" alt="תהליך ההרשמה" className="w-full transition-transform duration-300 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <p className="text-slate-600 leading-relaxed">מלא את הפרטים הבסיסיים שלך - שם מלא, אימייל וסיסמה. זה השלב הראשון בדרך להצלחה שלך.</p>
@@ -199,7 +199,7 @@ const Index = () => {
               <h3 className="text-2xl font-semibold text-slate-700 mb-6">הגדרת פרטי העסק</h3>
               <div className="group">
                 <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
-                  <img src="/lovable-uploads/Screenshot 2025-06-16 020049.png" alt="הגדרת העסק" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/lovable-uploads/dfb1f958-be77-4418-a144-227b07460f07.png" alt="הגדרת העסק" className="w-full transition-transform duration-300 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <p className="text-slate-600 leading-relaxed">הגדר את תחום העיסוק, אזור הפעילות, ומילות המפתח שיעזרו לנו למצוא את הלידים המתאימים ביותר עבורך.</p>
@@ -217,7 +217,7 @@ const Index = () => {
               <h3 className="text-2xl font-semibold text-slate-700 mb-6">כניסה לדאשבורד</h3>
               <div className="group">
                 <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
-                  <img src="/lovable-uploads/Screenshot 2025-06-16 011121.png" alt="הדאשבורד" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/lovable-uploads/73948188-63fa-4b02-913d-41f95a8692eb.png" alt="הדאשבורד" className="w-full transition-transform duration-300 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <p className="text-slate-600 leading-relaxed">צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
@@ -235,7 +235,7 @@ const Index = () => {
               <h3 className="text-2xl font-semibold text-slate-700 mb-6">מעקב אחרי התראות</h3>
               <div className="group">
                 <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
-                  <img src="/lovable-uploads/Screenshot 2025-06-16 011206.png" alt="חיבור לטלגרם" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/lovable-uploads/aeef2611-ddd2-4560-a33b-73c74431f663.png" alt="חיבור לטלגרם" className="w-full transition-transform duration-300 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <p className="text-slate-600 leading-relaxed">התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!</p>
@@ -253,7 +253,7 @@ const Index = () => {
               <h3 className="text-2xl font-semibold text-slate-700 mb-6">ודבר אחרון כדי שהAI יזהה אותך</h3>
               <div className="group">
                 <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
-                  <img src="/lovable-uploads/Screenshot 2025-06-16 011228.png" alt="שליחת הודעה לבוט AI" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <img src="/lovable-uploads/163b05ae-7ae1-4919-a79d-e9a47f9c3a77.png" alt="שליחת הודעה לבוט AI" className="w-full transition-transform duration-300 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <p className="text-slate-600 leading-relaxed">שלח הודעה לבוט עם המייל שלך</p>
