@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -219,32 +220,31 @@ const Index = () => {
         </h2>
         
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-8">
-            {/* Steps List */}
-            <div className="w-1/2 space-y-4">
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Steps List - Left Side */}
+            <div className="space-y-3">
               {steps.map((step) => (
-                <ClayCard 
+                <div
                   key={step.id}
-                  variant="elevated" 
-                  className={`cursor-pointer transform transition-all duration-300 hover:scale-105 ${
-                    selectedStep === step.id ? 'ring-2 ring-purple-400 shadow-lg' : ''
+                  className={`p-4 rounded-xl cursor-pointer transition-all duration-300 border-2 ${
+                    selectedStep === step.id 
+                      ? 'border-purple-300 bg-purple-50' 
+                      : 'border-gray-200 bg-white hover:border-purple-200 hover:bg-purple-25'
                   }`}
                   onClick={() => setSelectedStep(step.id)}
                 >
-                  <div className="flex items-center p-6">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-xl font-bold ${step.textColor} shadow-lg ml-4`}>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-lg font-bold ${step.textColor} shadow-md`}>
                       {step.id}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-slate-700">{step.title}</h3>
-                    </div>
+                    <h3 className="text-lg font-semibold text-slate-700">{step.title}</h3>
                   </div>
-                </ClayCard>
+                </div>
               ))}
             </div>
 
-            {/* Explanation Window */}
-            <div className="w-1/2">
+            {/* Explanation Window - Right Side */}
+            <div>
               <ClayCard variant="elevated" className="p-8 sticky top-32">
                 {steps.find(step => step.id === selectedStep) && (
                   <div>
