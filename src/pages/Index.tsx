@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
@@ -79,44 +80,70 @@ const Index = () => {
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-slate-700 mb-6 leading-tight">
-            אתה מפספס לידים בפייסבוק,
+            תפסיקו לפספס הזדמנויות עסקיות בפייסבוק,
             <br />
             <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              תן ל-AI למצוא אותם בשבילך
+              תנו ל-AI למצוא אותם בשבילך
             </span>
           </h1>
           
           <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            המערכת החכמה שמנתחת פוסטים בפייסבוק, מוצאת לקוחות פוטנציאליים שמתאימים בדיוק לעסק שלך, 
+            המערכת החכמה שמנתחת פוסטים בפייסבוק, מוצאת לקוחות ופוסטים פוטנציאליים שמתאימים בדיוק לעסק שלך, 
             ומספקת לך רשימה מסודרת של הזדמנויות עסקיות איכותיות
           </p>
           
           <div className="flex justify-center">
             <Link to="/register">
               <ClayButton variant="primary" size="lg" className="text-xl px-12 py-4">
-                התחל למצוא לידים
+                התחל עכשיו בחינם
               </ClayButton>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Features */}
-      <div className="mb-20">
-        <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
-          למה לבחור ב-snipost?
-        </h2>
+      {/* Pain Points and Solution */}
+      <div className="mb-20 relative py-16">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-100/30 via-blue-100/30 to-green-100/30 rounded-3xl -z-10"></div>
         
-        <div className="grid md:grid-cols-2 gap-8">
-          {features.map((feature, index) => (
-            <ClayCard key={index} variant="elevated" className="text-center">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                <feature.icon className="w-8 h-8 text-purple-700" />
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            <ClayCard variant="elevated" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-purple-50 p-8 rounded-3xl shadow-xl">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-300 to-blue-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Target className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-slate-700 mb-4">{feature.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+              <p className="text-xl text-slate-700 leading-relaxed font-medium">מכיר את התחושה שמישהו מחפש את השירות שלך בפייסבוק אבל הוא כבר הסתדר? או יותר גרוע, לא ידעת על זה בכלל?</p>
             </ClayCard>
-          ))}
+
+            <ClayCard variant="elevated" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 p-8 rounded-3xl shadow-xl">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-300 to-green-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Users className="w-10 h-10 text-white" />
+              </div>
+              <p className="text-xl text-slate-700 leading-relaxed font-medium">איך אתה מרגיש כשאתה רואה שיכולת באמת לתת ערך/להשפיע או פשוט לעשות עוד שת"פ שיוכל לקדם אותך?</p>
+            </ClayCard>
+
+            <ClayCard variant="elevated" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-green-50 p-8 rounded-3xl shadow-xl">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-300 to-teal-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <TrendingUp className="w-10 h-10 text-white" />
+              </div>
+              <p className="text-xl text-slate-700 leading-relaxed font-medium">המתחרים שלך מתקדמים ותמיד צעד אחד לפנייך? היית רוצה פשוט לנצח את המתחרים שלך?</p>
+            </ClayCard>
+
+            <ClayCard variant="elevated" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-teal-50 p-8 rounded-3xl shadow-xl">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-300 to-cyan-300 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Zap className="w-10 h-10 text-white" />
+              </div>
+              <p className="text-xl text-slate-700 leading-relaxed font-medium">ידעת שכל יום יש אנשים שצריכים אותך ומחפשים את השירות שלך בפייסבוק?</p>
+            </ClayCard>
+          </div>
+
+          <div className="text-center max-w-4xl mx-auto bg-gradient-to-br from-purple-600 to-blue-600 p-12 rounded-3xl shadow-xl text-white">
+            <p className="text-3xl font-bold mb-6">אנחנו מבינים מה אתה מרגיש, תחושת הפספוס הזאת נוראית...</p>
+            <p className="text-xl leading-relaxed">
+              אנחנו ב-snipost מבינים בדיוק את התסכול הזה. לכן פיתחנו מערכת AI חכמה שתעזור לך למצוא את כל ההזדמנויות העסקיות בזמן אמת, 
+              כדי שתוכל להגיע ראשון, לתת ערך אמיתי, ולהפוך כל הזדמנות להצלחה.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -135,127 +162,103 @@ const Index = () => {
         ))}
       </div>
 
-      {/* User Guide Section - Updated with correct image paths */}
+      {/* User Guide Section */}
       <div className="mb-20 relative py-16">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 via-blue-100/50 to-green-100/50 rounded-3xl -z-10"></div>
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           המסלול שלך להצלחה
         </h2>
         
-        <div className="max-w-6xl mx-auto px-6 space-y-16">
+        <div className="max-w-6xl mx-auto px-6 space-y-12">
           {/* Step 1 */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <ClayCard variant="elevated" className="relative">
-                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">1</div>
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <Users className="w-8 h-8 text-purple-700" />
-                </div>
-                <h3 className="text-2xl font-semibold text-slate-700 mb-4 text-center">הרשמה ראשונית</h3>
-                <p className="text-slate-600 leading-relaxed text-center">מלא את הפרטים הבסיסיים שלך - שם מלא, אימייל וסיסמה. זה השלב הראשון בדרך להצלחה שלך.</p>
-              </ClayCard>
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
-                <img 
-                  src="/lovable-uploads/8e351dfc-7329-407c-bf8a-d0f2a2e20f26.png" 
-                  alt="תהליך ההרשמה" 
-                  className="w-full h-auto object-contain"
-                />
+          <div className="relative">
+            <div className="absolute right-[50%] top-0 bottom-0 w-1 bg-gradient-to-b from-purple-200 to-blue-200 hidden md:block"></div>
+            <ClayCard variant="elevated" className="md:w-[48%] transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -right-8 w-16 h-16 rounded-full bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center text-2xl font-bold text-purple-700 shadow-lg hidden md:flex">1</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Users className="w-8 h-8 text-purple-700" />
               </div>
-            </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">הרשמה ראשונית</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 020004.png" alt="תהליך ההרשמה" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">מלא את הפרטים הבסיסיים שלך - שם מלא, אימייל וסיסמה. זה השלב הראשון בדרך להצלחה שלך.</p>
+              </div>
+            </ClayCard>
           </div>
 
           {/* Step 2 */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2">
-              <ClayCard variant="elevated" className="relative">
-                <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">2</div>
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-blue-200 to-green-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <Target className="w-8 h-8 text-blue-700" />
-                </div>
-                <h3 className="text-2xl font-semibold text-slate-700 mb-4 text-center">הגדרת פרטי העסק</h3>
-                <p className="text-slate-600 leading-relaxed text-center">הגדר את תחום העיסוק, אזור הפעילות, ומילות המפתח שיעזרו לנו למצוא את הלידים המתאימים ביותר עבורך.</p>
-              </ClayCard>
-            </div>
-            <div className="order-1">
-              <div className="rounded-xl overflow-hidden shadow-xl">
-                <img 
-                  src="/lovable-uploads/4546c6a8-3d2b-4089-8729-ac349be5bf35.png" 
-                  alt="הגדרת העסק" 
-                  className="w-full h-auto object-contain"
-                />
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] md:mr-auto transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -left-8 w-16 h-16 rounded-full bg-gradient-to-br from-blue-200 to-green-200 flex items-center justify-center text-2xl font-bold text-blue-700 shadow-lg hidden md:flex">2</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-blue-200 to-green-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Target className="w-8 h-8 text-blue-700" />
               </div>
-            </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">הגדרת פרטי העסק</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 020049.png" alt="הגדרת העסק" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">הגדר את תחום העיסוק, אזור הפעילות, ומילות המפתח שיעזרו לנו למצוא את הלידים המתאימים ביותר עבורך.</p>
+              </div>
+            </ClayCard>
           </div>
 
           {/* Step 3 */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <ClayCard variant="elevated" className="relative">
-                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">3</div>
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-teal-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <BarChart3 className="w-8 h-8 text-green-700" />
-                </div>
-                <h3 className="text-2xl font-semibold text-slate-700 mb-4 text-center">כניסה לדאשבורד</h3>
-                <p className="text-slate-600 leading-relaxed text-center">צפה בדאשבורד המתקدם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
-              </ClayCard>
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
-                <img 
-                  src="/lovable-uploads/a3a4d39b-3f64-4972-a543-b99dbdf1f93c.png" 
-                  alt="הדאשבורד" 
-                  className="w-full h-auto object-contain"
-                />
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -right-8 w-16 h-16 rounded-full bg-gradient-to-br from-green-200 to-teal-200 flex items-center justify-center text-2xl font-bold text-green-700 shadow-lg hidden md:flex">3</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-green-200 to-teal-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <BarChart3 className="w-8 h-8 text-green-700" />
               </div>
-            </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">כניסה לדאשבורד</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 011121.png" alt="הדאשבורד" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">צפה בדאשבורד המתקדם שלך, עם כל הלידים שנמצאו עבורך. סנן, מיין וארגן את ההזדמנויות העסקיות שלך.</p>
+              </div>
+            </ClayCard>
           </div>
 
           {/* Step 4 */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2">
-              <ClayCard variant="elevated" className="relative">
-                <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-purple-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">4</div>
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-teal-200 to-purple-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <Zap className="w-8 h-8 text-teal-700" />
-                </div>
-                <h3 className="text-2xl font-semibold text-slate-700 mb-4 text-center">מעקב אחרי התראות</h3>
-                <p className="text-slate-600 leading-relaxed text-center">התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!</p>
-              </ClayCard>
-            </div>
-            <div className="order-1">
-              <div className="rounded-xl overflow-hidden shadow-xl">
-                <img 
-                  src="/lovable-uploads/57da67ee-7773-4f9f-9cbc-549a91f14d5e.png" 
-                  alt="חיבור לטלגרם" 
-                  className="w-full h-auto object-contain"
-                />
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] md:mr-auto transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -left-8 w-16 h-16 rounded-full bg-gradient-to-br from-teal-200 to-purple-200 flex items-center justify-center text-2xl font-bold text-teal-700 shadow-lg hidden md:flex">4</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-teal-200 to-purple-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Zap className="w-8 h-8 text-teal-700" />
               </div>
-            </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">מעקב אחרי התראות</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 011206.png" alt="חיבור לטלגרם" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">התחבר לבוט הטלגרם שלנו וקבל התראות בזמן אמת על לידים חדשים. לא תפספס אף הזדמנות!</p>
+              </div>
+            </ClayCard>
           </div>
 
           {/* Step 5 */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <ClayCard variant="elevated" className="relative">
-                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">5</div>
-                <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
-                  <Mail className="w-8 h-8 text-purple-700" />
-                </div>
-                <h3 className="text-2xl font-semibold text-slate-700 mb-4 text-center">ודבר אחרון כדי שהAI יזהה אותך</h3>
-                <p className="text-slate-600 leading-relaxed text-center">שלח הודעה לבוט עם המייל שלך כדי שהמערכת תוכל לזהות אותך ולהתחיל לשלוח לך לידים.</p>
-              </ClayCard>
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="rounded-xl overflow-hidden shadow-xl">
-                <img 
-                  src="/lovable-uploads/3a82d45a-6e1a-4da4-8212-b10cc9a8fd15.png" 
-                  alt="שליחת הודעה לבוט AI" 
-                  className="w-full h-auto object-contain"
-                />
+          <div className="relative">
+            <ClayCard variant="elevated" className="md:w-[48%] transform transition-all duration-300 hover:scale-105 relative">
+              <div className="absolute top-8 -right-8 w-16 h-16 rounded-full bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-2xl font-bold text-purple-700 shadow-lg hidden md:flex">5</div>
+              <div className="w-16 h-16 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center shadow-[inset_0_4px_16px_rgba(255,255,255,0.4)]">
+                <Mail className="w-8 h-8 text-purple-700" />
               </div>
-            </div>
+              <h3 className="text-2xl font-semibold text-slate-700 mb-6">ודבר אחרון כדי שהAI יזהה אותך</h3>
+              <div className="group">
+                <div className="relative overflow-hidden rounded-xl mb-4 transform transition-all duration-300 group-hover:shadow-xl">
+                  <img src="/lovable-uploads/Screenshot 2025-06-16 011228.png" alt="שליחת הודעה לבוט AI" className="w-full transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <p className="text-slate-600 leading-relaxed">שלח הודעה לבוט עם המייל שלך</p>
+              </div>
+            </ClayCard>
           </div>
         </div>
       </div>
@@ -294,7 +297,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Pricing Section */}
+      {/* Pricing Section - moved here */}
       <div className="mb-20">
         <h2 className="text-4xl font-bold text-center text-slate-700 mb-16">
           תמחור פשוט ושקוף
@@ -386,8 +389,12 @@ const Index = () => {
         </Link>
       </ClayCard>
 
+      {/* User Guide Section */}
+      
+
       {/* Contact Section */}
-      <ClayCard className="text-center">
+      
+<ClayCard className="text-center">
         <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 flex items-center justify-center shadow-[inset_0_2px_8px_rgba(255,255,255,0.3)]">
           <Mail className="w-6 h-6 text-blue-800" />
         </div>
@@ -400,7 +407,7 @@ const Index = () => {
           className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors"
         >
           <Mail className="w-4 h-4 ml-2" />
-          shaysho111@gmail.com
+          info@snipost.com
         </a>
       </ClayCard>
     </div>
