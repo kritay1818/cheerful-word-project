@@ -6,9 +6,10 @@ interface ClayCardProps {
   children: React.ReactNode;
   className?: string;
   variant?: 'default' | 'elevated' | 'pressed';
+  onClick?: () => void;
 }
 
-const ClayCard = ({ children, className, variant = 'default' }: ClayCardProps) => {
+const ClayCard = ({ children, className, variant = 'default', onClick }: ClayCardProps) => {
   const baseClasses = "rounded-3xl p-6 transition-all duration-300";
   
   const variants = {
@@ -18,7 +19,10 @@ const ClayCard = ({ children, className, variant = 'default' }: ClayCardProps) =
   };
 
   return (
-    <div className={cn(baseClasses, variants[variant], className)}>
+    <div 
+      className={cn(baseClasses, variants[variant], onClick && 'cursor-pointer', className)}
+      onClick={onClick}
+    >
       {children}
     </div>
   );
