@@ -268,6 +268,60 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          business_description: string | null
+          business_type: string | null
+          created_at: string
+          current_leads: number | null
+          email_updates: boolean | null
+          filter_request: string | null
+          id: string
+          name: string
+          profession: string | null
+          specific_requests: string | null
+          target_area: string | null
+          target_leads: number | null
+          telegram_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_description?: string | null
+          business_type?: string | null
+          created_at?: string
+          current_leads?: number | null
+          email_updates?: boolean | null
+          filter_request?: string | null
+          id?: string
+          name: string
+          profession?: string | null
+          specific_requests?: string | null
+          target_area?: string | null
+          target_leads?: number | null
+          telegram_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_description?: string | null
+          business_type?: string | null
+          created_at?: string
+          current_leads?: number | null
+          email_updates?: boolean | null
+          filter_request?: string | null
+          id?: string
+          name?: string
+          profession?: string | null
+          specific_requests?: string | null
+          target_area?: string | null
+          target_leads?: number | null
+          telegram_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       real_estate_groups: {
         Row: {
           active: boolean
