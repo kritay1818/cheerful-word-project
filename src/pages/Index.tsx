@@ -253,7 +253,6 @@ const Index = () => {
             </div>
           ))}
         </div>
-        </div>
       </div>
 
       {/* How it works section */}
