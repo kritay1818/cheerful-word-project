@@ -278,6 +278,7 @@ export type Database = {
           filter_request: string | null
           id: string
           name: string
+          preferred_cities: string[] | null
           profession: string | null
           specific_requests: string | null
           target_area: string | null
@@ -295,6 +296,7 @@ export type Database = {
           filter_request?: string | null
           id?: string
           name: string
+          preferred_cities?: string[] | null
           profession?: string | null
           specific_requests?: string | null
           target_area?: string | null
@@ -312,6 +314,7 @@ export type Database = {
           filter_request?: string | null
           id?: string
           name?: string
+          preferred_cities?: string[] | null
           profession?: string | null
           specific_requests?: string | null
           target_area?: string | null

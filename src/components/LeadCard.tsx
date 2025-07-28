@@ -32,7 +32,7 @@ const LeadCard = ({ id, title, description, location, date, engagement, facebook
           .from('Client_post_match')
           .select('*')
           .eq('client_id', client.id)
-          .eq('post_id', id);
+          .eq('post_id', Number(id));
 
         console.log('Existing record check:', { existingRecord, selectError });
 
@@ -61,7 +61,7 @@ const LeadCard = ({ id, title, description, location, date, engagement, facebook
           .from('Client_post_match')
           .update({ clicked: true })
           .eq('client_id', client.id)
-          .eq('post_id', id)
+          .eq('post_id', Number(id))
           .select();
 
         if (error) {
