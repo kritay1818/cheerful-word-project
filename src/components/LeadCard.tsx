@@ -6,7 +6,7 @@ import { ExternalLink, MapPin, Calendar, Users, User } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface LeadCardProps {
-  id: number;
+  id: string | number;
   title: string;
   description: string;
   location: string;

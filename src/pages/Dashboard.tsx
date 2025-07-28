@@ -9,158 +9,114 @@ import { BarChart3, TrendingUp, RefreshCw, MessageCircle, ExternalLink, Mail, Se
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
-interface Post {
-  id: number;
-  text: string | null;
-  url: string | null;
+interface ClassifiedPost {
+  id: string;
+  original_post_id: number | null;
+  heat_score: number | null;
+  created_at: string | null;
+  action_type: string | null;
+  intent: string | null;
+  city: string | null;
+  area: string | null;
+  summary: string | null;
+  tags: string[] | null;
+  original_text: string | null;
+  post_url: string | null;
   group_url: string | null;
   poster_profile: string | null;
-  category: string | null;
-  created_at: string | null;
-  scanned_at: string;
-}
-
-interface ClientPostMatch {
-  id: number;
-  client_id: number | null;
-  post_id: number | null;
-  is_relevant: boolean | null;
-  clicked: boolean | null;
-  created_at: string;
-  Group_Posts: Post;
 }
 
 const Dashboard = () => {
+  const { user, session, loading } = useAuth();
   const [userData, setUserData] = useState<any>(null);
-  const [leads, setLeads] = useState<any[]>([]);
-  const [successRate, setSuccessRate] = useState<string>('0%');
+  const [leads, setLeads] = useState<ClassifiedPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const data = localStorage.getItem('currentClient');
-    if (data) {
-      const client = JSON.parse(data);
-      setUserData(client);
-      fetchUserLeads(client.id);
-    } else {
+    if (!loading && session?.user) {
+      fetchUserProfile();
+    } else if (!loading && !session) {
       setIsLoading(false);
     }
-  }, []);
+  }, [loading, session]);
 
-  const calculateSuccessRate = async (clientId: number, useCache: boolean = false) => {
+  const fetchUserProfile = async () => {
     try {
-      console.log('Calculating success rate for client:', clientId, 'useCache:', useCache);
-      
-      // Add a cache-busting parameter to force fresh data
-      const query = supabase
-        .from('Client_post_match')
-        .select('clicked')
-        .eq('client_id', clientId)
-        .eq('is_relevant', true);
-
-      // If not using cache, add a timestamp to force fresh data
-      if (!useCache) {
-        // Force a fresh query by adding a small delay
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-
-      const { data: allMatches, error } = await query;
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user?.id)
+        .single();
 
       if (error) {
-        console.error('Error fetching success rate data:', error);
-        return '0%';
-      }
-
-      console.log('All relevant matches for success rate:', allMatches);
-
-      if (allMatches && allMatches.length > 0) {
-        const clickedCount = allMatches.filter(match => match.clicked === true).length;
-        const totalCount = allMatches.length;
-        const rate = Math.round((clickedCount / totalCount) * 100);
-        console.log(`Success rate calculation: ${clickedCount}/${totalCount} = ${rate}%`);
-        return `${rate}%`;
-      }
-
-      return '0%';
-    } catch (error) {
-      console.error('Error calculating success rate:', error);
-      return '0%';
-    }
-  };
-
-  const fetchUserLeads = async (clientId: number) => {
-    try {
-      console.log('Fetching leads for client ID:', clientId);
-      
-      const { data: matches, error } = await supabase
-        .from('Client_post_match')
-        .select(`
-          *,
-          Group_Posts (
-            id,
-            text,
-            url,
-            group_url,
-            poster_profile,
-            category,
-            created_at,
-            scanned_at
-          )
-        `)
-        .eq('client_id', clientId)
-        .eq('is_relevant', true)
-        .order('created_at', { ascending: false });
-
-      console.log('Client post matches:', { matches, error });
-
-      if (error) {
-        console.error('Error fetching leads:', error);
+        console.error('Error fetching user profile:', error);
         toast({
-          title: "שגיאה בטעינת הלידים",
-          description: "לא הצלחנו לטעון את הלידים שלך",
+          title: "שגיאה בטעינת הפרופיל",
+          description: "לא הצלחנו לטעון את הפרופיל שלך",
           variant: "destructive",
         });
         return;
       }
 
-      if (matches && matches.length > 0) {
-        // Transform the data to match LeadCard props
-        const transformedLeads = matches.map((match: ClientPostMatch) => {
-          const post = match.Group_Posts;
-          return {
-            id: post.id,
-            title: post.text?.substring(0, 100) + '...' || 'פוסט ללא כותרת',
-            description: post.text || 'אין תיאור זמין',
-            location: post.category || 'לא צוין',
-            date: formatDate(post.scanned_at), // Always use scanned_at
-            engagement: Math.floor(Math.random() * 30) + 5, // Mock engagement for now
-            facebookUrl: post.url || post.group_url || '#',
-            posterProfile: post.poster_profile
-          };
-        });
-        
-        setLeads(transformedLeads);
-        console.log('Transformed leads:', transformedLeads);
+      setUserData(profile);
+      if (profile?.preferred_cities && profile.preferred_cities.length > 0) {
+        fetchClassifiedPosts(profile.preferred_cities);
       } else {
-        console.log('No relevant posts found for this client');
         setLeads([]);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+      setIsLoading(false);
+    }
+  };
+
+  const fetchClassifiedPosts = async (preferredCities: string[]) => {
+    try {
+      const { data: posts, error } = await supabase
+        .from('classified_posts')
+        .select('*')
+        .in('city', preferredCities)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching classified posts:', error);
+        toast({
+          title: "שגיאה בטעינת הפוסטים",
+          description: "לא הצלחנו לטעון את הפוסטים הרלוונטיים",
+          variant: "destructive",
+        });
+        setLeads([]);
+        return;
       }
 
-      // Calculate and set success rate
-      const rate = await calculateSuccessRate(clientId, true);
-      setSuccessRate(rate);
-      console.log('Final success rate set:', rate);
+      setLeads(posts || []);
     } catch (error) {
-      console.error('Unexpected error:', error);
-      toast({
-        title: "שגיאה",
-        description: "אירעה שגיאה בטעינת הנתונים",
-        variant: "destructive",
-      });
+      console.error('Error fetching classified posts:', error);
+      setLeads([]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const transformLeadForCard = (post: ClassifiedPost) => {
+    return {
+      id: post.id,
+      title: post.summary || post.original_text?.substring(0, 100) + '...' || 'פוסט ללא כותרת',
+      description: post.original_text || post.summary || 'אין תיאור זמין',
+      location: post.city || post.area || 'לא צוין',
+      date: formatDate(post.created_at || new Date().toISOString()),
+      engagement: post.heat_score || Math.floor(Math.random() * 30) + 5,
+      facebookUrl: post.post_url || post.group_url || '#',
+      posterProfile: post.poster_profile,
+      // Additional classified post data
+      actionType: post.action_type,
+      intent: post.intent,
+      tags: post.tags?.join(', ') || '',
+      area: post.area
+    };
   };
 
   const formatDate = (dateString: string) => {
@@ -179,33 +135,27 @@ const Dashboard = () => {
   };
 
   const handleRefresh = () => {
-    if (userData?.id) {
+    if (userData?.preferred_cities) {
       setIsLoading(true);
-      fetchUserLeads(userData.id);
+      fetchClassifiedPosts(userData.preferred_cities);
     }
   };
 
   const handlePostClick = async () => {
-    console.log('Post clicked, refreshing success rate...');
-    // Refresh the success rate when a post is clicked
-    if (userData?.id) {
-      // Force fresh data by not using cache
-      const rate = await calculateSuccessRate(userData.id, false);
-      setSuccessRate(rate);
-      console.log('Success rate updated to:', rate);
-    }
+    // Optional: Add analytics or tracking here
+    console.log('Post clicked');
   };
 
   const stats = [
     {
-      title: "לידים חדשים השבוע",
+      title: "פוסטים רלוונטיים",
       value: leads.length.toString(),
       icon: TrendingUp,
       color: "from-green-200 to-green-300 text-green-800"
     },
     {
-      title: "שיעור הצלחה",
-      value: successRate,
+      title: "ערים בסינון",
+      value: userData?.preferred_cities?.length?.toString() || '0',
       icon: BarChart3,
       color: "from-yellow-200 to-yellow-300 text-yellow-800"
     }
@@ -238,7 +188,10 @@ const Dashboard = () => {
                   שלום {userData?.name || 'משתמש'}! 👋
                 </h1>
                 <p className="text-lg text-slate-600">
-                  הנה הלידים החדשים שמצאנו עבור {userData?.Profession || 'העסק שלך'}
+                  הנה הפוסטים הרלוונטיים שמצאנו עבור {userData?.profession || 'העסק שלך'} 
+                  {userData?.preferred_cities && userData.preferred_cities.length > 0 && 
+                    ` באזורים: ${userData.preferred_cities.join(', ')}`
+                  }
                 </p>
               </div>
               <div className="mr-4">
@@ -279,7 +232,7 @@ const Dashboard = () => {
 
         {/* Controls */}
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-700">לידים חדשים</h2>
+          <h2 className="text-2xl font-bold text-slate-700">פוסטים רלוונטיים</h2>
           <div className="flex space-x-4">
             <ClayButton variant="secondary" size="sm" onClick={handleRefresh} disabled={isLoading}>
               <RefreshCw className="w-4 h-4 ml-2" />
@@ -288,17 +241,41 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Leads Grid */}
+        {/* Posts Grid */}
         {leads.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {leads.map((lead) => (
-              <LeadCard key={lead.id} {...lead} onPostClick={handlePostClick} />
-            ))}
+            {leads.map((post) => {
+              const leadProps = transformLeadForCard(post);
+              return (
+                <div key={post.id} className="space-y-4">
+                  <LeadCard {...leadProps} onPostClick={handlePostClick} />
+                  {/* Additional classified post info */}
+                  <ClayCard className="p-4 text-sm">
+                    <div className="grid grid-cols-2 gap-2 text-slate-600">
+                      {post.action_type && <div><span className="font-medium">סוג פעולה:</span> {post.action_type}</div>}
+                      {post.intent && <div><span className="font-medium">כוונה:</span> {post.intent}</div>}
+                      {post.heat_score && <div><span className="font-medium">ציון חום:</span> {post.heat_score}</div>}
+                      {post.area && <div><span className="font-medium">אזור:</span> {post.area}</div>}
+                      {post.tags && post.tags.length > 0 && (
+                        <div className="col-span-2">
+                          <span className="font-medium">תגים:</span> {post.tags.join(', ')}
+                        </div>
+                      )}
+                    </div>
+                  </ClayCard>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <ClayCard className="text-center py-12">
-            <h3 className="text-xl font-semibold text-slate-700 mb-2">אין לידים חדשים</h3>
-            <p className="text-slate-600 mb-4">לא מצאנו לידים רלוונטיים עבורך בזמן האחרון</p>
+            <h3 className="text-xl font-semibold text-slate-700 mb-2">אין פוסטים רלוונטיים</h3>
+            <p className="text-slate-600 mb-4">
+              {userData?.preferred_cities && userData.preferred_cities.length > 0 
+                ? `לא מצאנו פוסטים רלוונטיים בערים: ${userData.preferred_cities.join(', ')}`
+                : 'אנא הגדר ערים מועדפות בפרופיל שלך כדי לראות פוסטים רלוונטיים'
+              }
+            </p>
             <ClayButton variant="primary" onClick={handleRefresh}>
               בדוק שוב
             </ClayButton>
@@ -309,7 +286,7 @@ const Dashboard = () => {
         {leads.length > 0 && (
           <div className="text-center mb-8">
             <ClayButton variant="primary" size="lg">
-              טען עוד לידים
+              טען עוד פוסטים
             </ClayButton>
           </div>
         )}
