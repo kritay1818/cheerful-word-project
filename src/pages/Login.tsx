@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import ClayCard from '@/components/ClayCard';
 import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
 import { toast } from '@/hooks/use-toast';
-import { LogIn, UserPlus } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 const Login = () => {
@@ -15,6 +15,17 @@ const Login = () => {
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        navigate('/dashboard');
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -27,96 +38,33 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    console.log('Attempting login with:', { 
-      email: formData.email, 
-      emailLength: formData.email.length,
-      password: '***',
-      passwordLength: formData.password.length 
-    });
-    
     try {
-      // First, let's check what emails exist in the database
-      const { data: allClients, error: allClientsError } = await supabase
-        .from('Clients')
-        .select('id, email, name, active');
-      
-      console.log('All clients in database:', allClients);
-      
-      // Now check for email match only
-      const { data: emailMatches, error: emailError } = await supabase
-        .from('Clients')
-        .select('*')
-        .eq('email', formData.email.trim());
-      
-      console.log('Email matches:', emailMatches);
-      
-      // Finally, check for both email and password
-      const { data: clients, error } = await supabase
-        .from('Clients')
-        .select('*')
-        .eq('email', formData.email.trim())
-        .eq('password', formData.password);
-
-      console.log('Email + password matches:', { clients, error });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email.trim(),
+        password: formData.password,
+      });
 
       if (error) {
-        console.error('Database error:', error);
-        throw new Error('שגיאה בחיבור למסד הנתונים');
+        throw error;
       }
 
-      if (!clients || clients.length === 0) {
-        console.log('No matching client found');
-        // Check if email exists but password is wrong
-        if (emailMatches && emailMatches.length > 0) {
-          console.log('Email exists but password mismatch');
-          throw new Error('אימייל או סיסמה שגויים');
-        } else {
-          console.log('Email not found in database');
-          throw new Error('אימייל או סיסמה שגויים');
-        }
-      }
-
-      const client = clients[0];
-      console.log('Found client:', { id: client.id, name: client.name, active: client.active });
-
-      // Check if client is active - if not, redirect to trial expired page
-      if (!client.active) {
-        // Store client info even for inactive users so they can see their data
-        localStorage.setItem('isLoggedIn', 'false');
-        localStorage.setItem('currentClient', JSON.stringify(client));
-        
-        console.log('Client is inactive, redirecting to trial expired page');
-        
+      if (data.user) {
         toast({
-          title: "תקופת הניסיון הסתיימה",
-          description: "אנא בחר מנוי כדי להמשיך להשתמש בשירות",
-          variant: "destructive",
+          title: "התחברת בהצלחה!",
+          description: `ברוך הבא`,
         });
         
-        // Navigate to trial expired page
-        navigate('/trial-expired');
-        return;
+        // Navigate to dashboard
+        navigate('/dashboard');
       }
-
-      // Store client info in localStorage for session management
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentClient', JSON.stringify(client));
       
-      console.log('Login successful, stored client data');
-      
-      toast({
-        title: "התחברת בהצלחה!",
-        description: `ברוך הבא ${client.name}`,
-      });
-      
-      // Navigate to dashboard
-      navigate('/dashboard');
-      
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
       toast({
         title: "שגיאה בהתחברות",
-        description: error instanceof Error ? error.message : "אימייל או סיסמה שגויים",
+        description: error.message === 'Invalid login credentials' 
+          ? "אימייל או סיסמה שגויים" 
+          : "שגיאה בהתחברות. אנא נסה שוב",
         variant: "destructive",
       });
     } finally {

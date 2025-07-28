@@ -8,13 +8,13 @@ import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
 import { toast } from '@/hooks/use-toast';
 import { UserPlus, Building, Target, Mail } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
     emailUpdates: false,
     businessType: '',
     targetArea: '',
@@ -27,24 +27,50 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Get temporary signup data
-    const tempSignupData = localStorage.getItem('tempSignupData');
-    
-    if (!tempSignupData) {
-      // If no signup data, redirect to signup
-      navigate('/signup');
-      return;
-    }
+    // Check authentication and get user data
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        // If no session, check for temp signup data
+        const tempSignupData = localStorage.getItem('tempSignupData');
+        if (!tempSignupData) {
+          navigate('/signup');
+          return;
+        }
+        
+        // Pre-fill user data from signup
+        const signupData = JSON.parse(tempSignupData);
+        setFormData(prev => ({
+          ...prev,
+          name: signupData.name,
+          email: signupData.email,
+          emailUpdates: signupData.emailUpdates || false
+        }));
+      } else {
+        // User is authenticated, get profile data if it exists
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .single();
 
-    // Pre-fill user data from signup
-    const signupData = JSON.parse(tempSignupData);
-    setFormData(prev => ({
-      ...prev,
-      name: signupData.name,
-      email: signupData.email,
-      password: signupData.password,
-      emailUpdates: signupData.emailUpdates || false
-    }));
+        if (profile) {
+          // If profile exists, redirect to dashboard
+          navigate('/dashboard');
+        } else {
+          // Pre-fill with auth data
+          setFormData(prev => ({
+            ...prev,
+            name: session.user.user_metadata?.name || '',
+            email: session.user.email || '',
+            emailUpdates: session.user.user_metadata?.email_updates || false
+          }));
+        }
+      }
+    };
+
+    checkAuth();
   }, [navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -61,34 +87,67 @@ const Register = () => {
     setIsLoading(true);
     
     try {
-      console.log('Sending complete registration data:', formData);
+      const { data: { session } } = await supabase.auth.getSession();
       
-      // Send complete data to N8N webhook including name, email, password, and emailUpdates
-      const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/Register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      if (session) {
+        // User is authenticated, create/update their profile
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .upsert({
+            user_id: session.user.id,
+            name: formData.name,
+            email_updates: formData.emailUpdates,
+            business_type: formData.businessType,
+            target_area: formData.targetArea,
+            current_leads: parseInt(formData.currentLeads) || 0,
+            target_leads: parseInt(formData.targetLeads) || 0,
+            business_description: formData.businessDescription,
+            specific_requests: formData.specificRequests,
+            profession: formData.businessType
+          });
 
-      if (response.ok) {
-        console.log('Registration request sent successfully');
-        
+        if (profileError) {
+          throw profileError;
+        }
+
         toast({
           title: "נרשמת בהצלחה!",
-          description: "הבקשה נשלחה למערכת. תוכל להתחבר לאחר אישור החשבון",
+          description: "החשבון שלך מוכן לשימוש",
         });
 
         // Clean up temporary data
         localStorage.removeItem('tempSignupData');
         
-        // Navigate to login page
+        // Navigate to dashboard
         setTimeout(() => {
-          navigate('/login');
+          navigate('/dashboard');
         }, 1500);
       } else {
-        throw new Error(`Registration failed with status: ${response.status}`);
+        // Fallback to webhook for non-authenticated users
+        const response = await fetch('https://n8n.srv778969.hstgr.cloud/webhook/Register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          toast({
+            title: "נרשמת בהצלחה!",
+            description: "הבקשה נשלחה למערכת. תוכל להתחבר לאחר אישור החשבון",
+          });
+
+          // Clean up temporary data
+          localStorage.removeItem('tempSignupData');
+          
+          // Navigate to login page
+          setTimeout(() => {
+            navigate('/login');
+          }, 1500);
+        } else {
+          throw new Error(`Registration failed with status: ${response.status}`);
+        }
       }
       
     } catch (error) {

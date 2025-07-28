@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -8,7 +8,8 @@ import ClayInput from '@/components/ClayInput';
 import ClayButton from '@/components/ClayButton';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { UserPlus, LogIn } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,6 +21,18 @@ const Signup = () => {
   });
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [emailUpdates, setEmailUpdates] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        navigate('/dashboard');
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -30,6 +43,7 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     if (!acceptedTerms) {
       toast({
@@ -37,6 +51,7 @@ const Signup = () => {
         description: "יש לאשר את תנאי השימוש כדי להמשיך",
         variant: "destructive",
       });
+      setIsLoading(false);
       return;
     }
     
@@ -46,6 +61,7 @@ const Signup = () => {
         description: "הסיסמאות אינן תואמות",
         variant: "destructive",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -55,38 +71,60 @@ const Signup = () => {
         description: "הסיסמה חייבת להכיל לפחות 6 תווים",
         variant: "destructive",
       });
+      setIsLoading(false);
       return;
     }
     
     try {
-      // Store signup data temporarily for the registration process
-      const signupData = {
-        name: formData.name,
-        email: formData.email,
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email.trim(),
         password: formData.password,
-        emailUpdates: emailUpdates,
-        createdAt: new Date().toISOString()
-      };
-      
-      localStorage.setItem('tempSignupData', JSON.stringify(signupData));
-      
-      toast({
-        title: "נרשמת בהצלחה!",
-        description: "עכשיו נשלים את פרטי העסק שלך",
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+          data: {
+            name: formData.name,
+            email_updates: emailUpdates
+          }
+        }
       });
 
-      // Navigate to registration to complete business details
-      setTimeout(() => {
-        navigate('/register');
-      }, 1000);
+      if (error) {
+        throw error;
+      }
+
+      if (data.user) {
+        toast({
+          title: "נרשמת בהצלחה!",
+          description: "עכשיו נשלים את פרטי העסק שלך",
+        });
+
+        // Store signup data temporarily for the registration process
+        const signupData = {
+          name: formData.name,
+          email: formData.email,
+          emailUpdates: emailUpdates,
+          createdAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('tempSignupData', JSON.stringify(signupData));
+
+        // Navigate to registration to complete business details
+        setTimeout(() => {
+          navigate('/register');
+        }, 1000);
+      }
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Signup error:', error);
       toast({
         title: "שגיאה ברישום",
-        description: "אנא נסה שוב מאוחר יותר",
+        description: error.message === 'User already registered' 
+          ? "המשתמש כבר רשום במערכת" 
+          : "אנא נסה שוב מאוחר יותר",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 

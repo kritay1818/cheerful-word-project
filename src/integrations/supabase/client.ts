@@ -6,11 +6,6 @@ import type { Database } from './types';
 const SUPABASE_URL = "https://zghntaxqwiegmjqdvetg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnaG50YXhxd2llZ21qcWR2ZXRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4Mzk3MjUsImV4cCI6MjA2MzQxNTcyNX0.VVT1gETgl-ncyLAoCwejxsl0ZrE5gBMpLXAF_EzEIVo";
 
-console.log('Supabase connection details:');
-console.log('URL:', SUPABASE_URL);
-console.log('Project ID from URL:', SUPABASE_URL.split('//')[1].split('.')[0]);
-console.log('Key prefix:', SUPABASE_PUBLISHABLE_KEY.substring(0, 20) + '...');
-
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
@@ -18,26 +13,5 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
   auth: {
     persistSession: true,
     autoRefreshToken: true,
-  }
-});
-
-// Test the connection on initialization with detailed error logging
-supabase.from('Clients').select('*').then(({ data, error, count }) => {
-  console.log('Detailed Clients table test:');
-  console.log('Error:', error);
-  console.log('Data:', data);
-  console.log('Count:', count);
-  console.log('Data length:', data?.length || 0);
-  
-  if (error) {
-    console.error('Supabase connection test failed:', error);
-    console.error('Error code:', error.code);
-    console.error('Error message:', error.message);
-    console.error('Error details:', error.details);
-  } else {
-    console.log('Supabase connection test successful. Total clients retrieved:', data?.length || 0);
-    if (data && data.length > 0) {
-      console.log('Sample client data:', data[0]);
-    }
   }
 });
